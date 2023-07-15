@@ -9,7 +9,7 @@ const getStudent = asyncHandler(async (req, res) => {
     const findStudent = await Student.find()
 
     if (!findStudent) {
-        return res.status(404).json({ message: 'No students found' })
+        return res.status(400).json({ message: 'No students found' })
     } else {
         res.status(200).json(findStudent)
     }
@@ -26,13 +26,13 @@ const createStudent = asyncHandler(async (req, res) => {
 
     // Check if all fields are entered...
     if (!firstName || !lastName || !gender || !courses || !contact || !guardianNum || !regNo || !department || !homeAddress || !secondContact) {
-        return res.status(400).json({ error: 'Please provide all required fields' })
+        return res.status(400).json({ message: 'Please provide all required fields' })
     }
 
     // Check for valid Reg Numbers...
     const validRegNo = /^[A-Z]{3,4}\/\d{2}\/\d{1,6}$/
     if (!validRegNo) {
-        return res.status(400).json({ error: 'Invalid Registration number format!' })
+        return res.status(400).json({ message: 'Invalid Registration number format!' })
     }
 
     // Check for duplicate reg numbers...
