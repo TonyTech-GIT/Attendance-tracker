@@ -30,7 +30,7 @@ const createStudent = asyncHandler(async (req, res) => {
     }
 
     // Check for valid Reg Numbers...
-    const validRegNo = /^[A-Z]{3,4}\/\d{2}\/\d{1,6}$/
+    const validRegNo = /^[A-Z]{3,4}\/\d{2}\/\d{6}$/
     if (!validRegNo) {
         return res.status(400).json({ message: 'Invalid Registration number format!' })
     }
