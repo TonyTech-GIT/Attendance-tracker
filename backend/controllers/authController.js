@@ -51,6 +51,7 @@ const authorizeUser = async (req, res) => {
 
     // Creating user...
     const user = await User.create({
+
         _id: id,
         userName,
         email,
@@ -61,13 +62,44 @@ const authorizeUser = async (req, res) => {
 
 
 
+    // return json object...
+    res.status(200).json({
+        _id: user._id,
+        userName: user.userName,
+        email: user.email,
+        role: user.role,
+        token: userToken
+    })
+
+
+    // if (req.body.role === 'admin') {
+    //     res.status(200).json({
+    //         _id: user.id,
+    //         userName: user.userName,
+    //         email: user.email,
+    //         role: user.role,
+    //         token: user.token
+    //     })
+    // } else {
+    //     res.status(200).json({
+    //         _id: user.id,
+    //         userName: user.userName,
+    //         email: user.email,
+    //         role: user.role,
+    //         token: user.token
+    //     })
+
+    // }
+
+
+
     // Check if user is admin or student
 
-    if (req.body.role === 'admin') {
-        res.status(200).json(user)
-    } else {
-        res.status(200).json(user)
-    }
+    // if (req.body.role === 'admin') {
+    //     res.status(200).json(user)
+    // } else {
+    //     res.status(200).json(user)
+    // }
 
 }
 
