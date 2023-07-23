@@ -1,0 +1,62 @@
+/* Utilities... */
+.flex{
+    display: flex;
+  }
+  .flex-jc_sb{
+    display: flex;
+    justify-content: space-between;
+  }
+  .flex-ai_c{
+    display: flex;
+    align-items: center;
+  }
+  
+  .grid{
+    display: grid;
+  }
+  .grid-jc_sb{
+    display: grid;
+    justify-content: space-between;
+  }
+  .grid-ai_c{
+    display: grid;
+    align-items: center;
+  }
+  .flex{
+    display: flex;
+  }
+  .flex-jc_sb{
+    display: flex;
+    justify-content: space-between;
+  }
+  .flex-ai_c{
+    display: flex;
+    align-items: center;
+  }
+
+  .dashBtn{
+    padding: .5em 1em;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 200ms all ease-in;
+  }
+  .dashBtn:hover{
+    transform: scale(1.1);
+  }
+  
+  .error-msg{
+    margin-bottom: 2em;
+    text-align: center;
+    color: rgb(199, 52, 52);
+    font-weight: 600;
+    /* margin-left: 1em; */
+  }
+  .error-icon{
+    color: rgb(247, 39, 39);
+    margin-inline-end: .3em;
+  }
+
+  body.active-modal{
+    overflow-y: hidden;
+  }
