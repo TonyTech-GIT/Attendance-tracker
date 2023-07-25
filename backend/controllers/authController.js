@@ -136,6 +136,7 @@ const loginUser = asyncHandler(async (req, res) => {
                 if (user && authMatch) {
                     res.status(200).json({
                         _id: user.id,
+                        userName: user.userName,
                         email,
                         password,
                         role: user.role,
