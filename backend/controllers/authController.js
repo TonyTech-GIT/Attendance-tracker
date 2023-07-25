@@ -203,6 +203,7 @@ const getUser = asyncHandler(async (req, res) => {
 
     if (user.role === 'admin') {
         res.status(200).json({ message: 'admin', user })
+        console.log('hello user')
     } else {
         res.status(200).json({ message: 'student', user })
     }
