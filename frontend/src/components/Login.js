@@ -4,11 +4,7 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationCircle, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
-<<<<<<< HEAD
-const Login = ({ dataReceived }) => {
-=======
 const Login = () => {
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
@@ -41,13 +37,7 @@ const Login = () => {
         axios
             .post('http://localhost:5000/auth/login', user)
             .then((response) => {
-<<<<<<< HEAD
-                const userData = response.data;
-
-                dataReceived(userData)
-=======
                 // const userData = response.data;
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
 
                 const userRole = response.data.role
                 if (userRole === 'admin') {
@@ -56,11 +46,7 @@ const Login = () => {
                     navigate('/auth/student')
                 }
 
-<<<<<<< HEAD
-                // console.log(userRole);
-=======
                 console.log(userRole);
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
                 console.log(response)
                 console.log(response.data)
                 // alert('Login successful')

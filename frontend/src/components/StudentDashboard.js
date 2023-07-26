@@ -4,16 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose, faExclamationCircle, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import axios from "axios"
-<<<<<<< HEAD
-import AdminDataContext from "./AdminDataContext"
-
-
-const StudentDashboard = ({ authDetails, children }) => {
-=======
 
 
 const StudentDashboard = ({ authDetails }) => {
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
 
 
     // const { studentData } = useContext(AuthContext)
@@ -34,11 +27,6 @@ const StudentDashboard = ({ authDetails }) => {
     const [homeAddress, setHomeAddress] = useState('')
     const [secondContact, setSecondContact] = useState('')
 
-<<<<<<< HEAD
-    const [validData, setValidData] = useState([])
-
-=======
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
     const navigate = useNavigate()
 
 
@@ -64,21 +52,6 @@ const StudentDashboard = ({ authDetails }) => {
             console.log('ygugiyho')
         }
 
-<<<<<<< HEAD
-        // Fetch valid student data for course being offered...
-        axios
-            .get('http://localhost:5000/auth/studentReg')
-            .then((response) => {
-                // const validData = response.data
-
-                setValidData(response.data)
-            })
-            .catch((err) => {
-                console.log("Error fetching valid student data ", err)
-            })
-
-=======
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
 
         const studentData = {
 
@@ -167,18 +140,8 @@ const StudentDashboard = ({ authDetails }) => {
     return (
         <div>
 
-            <div>Hello world</div>
-
-<<<<<<< HEAD
-            <div>Testing out something...</div>
-
 
             {/* STUDENT HEADER SECTION STARTS... */}
-
-=======
-            <div>tesing some things out</div>
-            {/* STUDENT HEADER SECTION STARTS... */}
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
             <section className="student-header flex flex-jc_sb flex-ai_c">
                 <div className="pg-title">
                     <h1>Student Dashboard</h1>
@@ -192,12 +155,6 @@ const StudentDashboard = ({ authDetails }) => {
                         </div>
                     </Link>
 
-<<<<<<< HEAD
-
-                    {/* STUDENT PROFILE FORM MODAL STARTS... */}
-
-=======
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
                     {modalMe && (<main className="student-modal-me">
                         <div className="profile ">
                             {errorMessage && (
@@ -343,22 +300,10 @@ const StudentDashboard = ({ authDetails }) => {
 
                         </div>
 
-<<<<<<< HEAD
-                        <AdminDataContext.Provider value={validData} >
-                            {children}
-                        </AdminDataContext.Provider >
-
-=======
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
 
 
                     </main>)}
 
-<<<<<<< HEAD
-                    {/* STUDENT PROFILE FORM MODAL ENDS... */}
-
-=======
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
 
                     <div className="logout">
                         <Link to={'/'}>
@@ -391,11 +336,6 @@ const StudentDashboard = ({ authDetails }) => {
                             <li>Courses</li>
                             {/* <li>Student Profile</li> */}
 
-<<<<<<< HEAD
-                            {/* STUDENT STATIC PROFILE VIEW MODAL STARTS... */}
-
-=======
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
                             {showModal && (
                                 <div className="modal-1">
 
@@ -480,11 +420,6 @@ const StudentDashboard = ({ authDetails }) => {
                                 </div>
                             )}
 
-<<<<<<< HEAD
-                            {/* STUDENT STATIC PROFILE VIEW MODAL ENDS... */}
-
-=======
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
                         </ul>
                     </div>
                 </aside>

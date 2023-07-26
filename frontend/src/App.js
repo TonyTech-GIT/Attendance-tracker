@@ -30,11 +30,7 @@ const App = () => {
 
           <Route path='/auth' element={<Auth dataReceived={handleDataForStudent} />} />
 
-<<<<<<< HEAD
           <Route path='/login' element={<Login dataReceived={handleDataForStudent} />} />
-=======
-          <Route path='/login' element={<Login />} />
->>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
 
           <Route path='/auth/admin' element={<AdminDashboard />} />
           <Route path='/auth/admin/report' element={<Report />} />
