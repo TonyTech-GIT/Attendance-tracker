@@ -11,6 +11,7 @@ const AuthProvider = ({ children }) => {
         role: '',
     })
 
+<<<<<<< HEAD
 
 
     return (
@@ -24,6 +25,12 @@ const AuthProvider = ({ children }) => {
 
         </>
 
+=======
+    return (
+        <AuthContext.Provider value={{ studentData, setStudentData }}>
+            {children}
+        </AuthContext.Provider>
+>>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
     )
 }
 

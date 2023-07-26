@@ -4,10 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose, faExclamationCircle, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import axios from "axios"
+<<<<<<< HEAD
 import AdminDataContext from "./AdminDataContext"
 
 
 const StudentDashboard = ({ authDetails, children }) => {
+=======
+
+
+const StudentDashboard = ({ authDetails }) => {
+>>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
 
 
     // const { studentData } = useContext(AuthContext)
@@ -28,8 +34,11 @@ const StudentDashboard = ({ authDetails, children }) => {
     const [homeAddress, setHomeAddress] = useState('')
     const [secondContact, setSecondContact] = useState('')
 
+<<<<<<< HEAD
     const [validData, setValidData] = useState([])
 
+=======
+>>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
     const navigate = useNavigate()
 
 
@@ -55,6 +64,7 @@ const StudentDashboard = ({ authDetails, children }) => {
             console.log('ygugiyho')
         }
 
+<<<<<<< HEAD
         // Fetch valid student data for course being offered...
         axios
             .get('http://localhost:5000/auth/studentReg')
@@ -67,6 +77,8 @@ const StudentDashboard = ({ authDetails, children }) => {
                 console.log("Error fetching valid student data ", err)
             })
 
+=======
+>>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
 
         const studentData = {
 
@@ -157,11 +169,16 @@ const StudentDashboard = ({ authDetails, children }) => {
 
             <div>Hello world</div>
 
+<<<<<<< HEAD
             <div>Testing out something...</div>
 
 
             {/* STUDENT HEADER SECTION STARTS... */}
 
+=======
+            <div>tesing some things out</div>
+            {/* STUDENT HEADER SECTION STARTS... */}
+>>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
             <section className="student-header flex flex-jc_sb flex-ai_c">
                 <div className="pg-title">
                     <h1>Student Dashboard</h1>
@@ -175,9 +192,12 @@ const StudentDashboard = ({ authDetails, children }) => {
                         </div>
                     </Link>
 
+<<<<<<< HEAD
 
                     {/* STUDENT PROFILE FORM MODAL STARTS... */}
 
+=======
+>>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
                     {modalMe && (<main className="student-modal-me">
                         <div className="profile ">
                             {errorMessage && (
@@ -323,16 +343,22 @@ const StudentDashboard = ({ authDetails, children }) => {
 
                         </div>
 
+<<<<<<< HEAD
                         <AdminDataContext.Provider value={validData} >
                             {children}
                         </AdminDataContext.Provider >
 
+=======
+>>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
 
 
                     </main>)}
 
+<<<<<<< HEAD
                     {/* STUDENT PROFILE FORM MODAL ENDS... */}
 
+=======
+>>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
 
                     <div className="logout">
                         <Link to={'/'}>
@@ -365,8 +391,11 @@ const StudentDashboard = ({ authDetails, children }) => {
                             <li>Courses</li>
                             {/* <li>Student Profile</li> */}
 
+<<<<<<< HEAD
                             {/* STUDENT STATIC PROFILE VIEW MODAL STARTS... */}
 
+=======
+>>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
                             {showModal && (
                                 <div className="modal-1">
 
@@ -451,8 +480,11 @@ const StudentDashboard = ({ authDetails, children }) => {
                                 </div>
                             )}
 
+<<<<<<< HEAD
                             {/* STUDENT STATIC PROFILE VIEW MODAL ENDS... */}
 
+=======
+>>>>>>> 1c5cab29bfee434c0d08399954ab7abe896dc0af
                         </ul>
                     </div>
                 </aside>
