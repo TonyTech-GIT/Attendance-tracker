@@ -1,17 +1,22 @@
 import React from 'react'
 // import { useState } from 'react';
+import { useContext } from 'react'
+
 import { Link } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom'
+import AdminDataContext from '../AdminDataContext';
 
 const Report = () => {
-    const studentsList = [
-        {
-            id: 1, name: "John Doe", subject: 'Math'
-        },
-        {
-            id: 2, name: "Mark Bro", subject: "Science"
-        }
-    ]
+    const validStudents = useContext(AdminDataContext)
+
+    // const studentsList = [
+    //     {
+    //         id: 1, name: "John Doe", subject: 'Math'
+    //     },
+    //     {
+    //         id: 2, name: "Mark Bro", subject: "Science"
+    //     }
+    // ]
 
 
     return (
@@ -22,7 +27,26 @@ const Report = () => {
 
             <main className='student-list'>
                 {/* function to map through list of students offering a course... */}
-                {studentsList.length === 0 ? (
+                {validStudents?.length > 0 ? (
+                    <p>No Students Yet</p>
+                ) : (
+                    <>
+                        {validStudents?.map((validStudent, index) => (
+                            <Link to={`/auth/admin/report/${validStudent.id}`} className='student-links' key={index} >
+
+                                <li className='student'>
+                                    <h3>{validStudent.userName}</h3>
+                                    <p>{validStudent.regNo}</p>
+                                </li>
+
+                            </Link>
+                        ))}
+
+
+                    </>
+                )}
+
+                {/* {studentsList.length === 0 ? (
                     <p>No Students Yet</p>
                 ) : (
                     <>
@@ -39,7 +63,7 @@ const Report = () => {
 
 
                     </>
-                )}
+                )} */}
 
             </main>
         </section>

@@ -4,9 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 
+// import AdminDataContext from "./AdminDataContext"
+
 const AdminDashboard = () => {
     const [showModal, setShowModal] = useState(false)
     const [modalMe, setModalMe] = useState(false)
+
+    // const validData = useContext(AdminDataContext)
 
     const navigate = useNavigate()
 

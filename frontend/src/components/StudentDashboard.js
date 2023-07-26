@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose, faExclamationCircle, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import axios from "axios"
+import AdminDataContext from "./AdminDataContext"
 
 
-const StudentDashboard = ({ authDetails }) => {
+
+const StudentDashboard = ({ authDetails, children }) => {
 
 
     // const { studentData } = useContext(AuthContext)
@@ -27,6 +29,8 @@ const StudentDashboard = ({ authDetails }) => {
     const [homeAddress, setHomeAddress] = useState('')
     const [secondContact, setSecondContact] = useState('')
 
+    const [validStudent, setValidStudent] = useState([])
+
     const navigate = useNavigate()
 
 
@@ -44,6 +48,26 @@ const StudentDashboard = ({ authDetails }) => {
 
     // Confirm button...
     const handleMeConfirm = () => {
+
+        // axios GET request for valid students...
+        axios
+            .get('http://localhost:5000/auth/studentReg')
+            .then((response) => {
+                setValidStudent(response.data)
+
+                const testData = response.data
+
+                console.log(testData)
+
+                // console.log(validStudent);
+            })
+            .catch((err) => {
+                console.log("Error fetching data", err)
+            })
+
+
+
+
 
         if (authDetails) {
             console.log(authDetails)
@@ -447,8 +471,11 @@ const StudentDashboard = ({ authDetails }) => {
 
             </section>
 
+            <AdminDataContext.Provider value={validStudent}>
+                {children}
+            </AdminDataContext.Provider>
 
-            {/* ADMIN BODY SECTION END... */}
+            {/* STUDENT BODY SECTION END... */}
         </div>
     )
 }

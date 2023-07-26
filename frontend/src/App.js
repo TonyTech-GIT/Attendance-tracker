@@ -36,7 +36,7 @@ const App = () => {
           <Route path='/auth/admin/report' element={<Report />} />
           <Route path={`/auth/admin/report/:studentId`} element={<IndividualStu />} />
 
-          <Route path='/auth/student' element={<StudentDashboard authDetails={dataFromAuth} />} />
+          <Route path='/auth/student' element={<StudentDashboard authDetails={dataFromAuth} > <Report /> </StudentDashboard>} />
         </Routes>
       </Router>
     </div>

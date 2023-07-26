@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationCircle, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
-const Login = () => {
+const Login = ({ dataReceived }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
@@ -37,7 +37,9 @@ const Login = () => {
         axios
             .post('http://localhost:5000/auth/login', user)
             .then((response) => {
-                // const userData = response.data;
+                const userData = response.data;
+
+                dataReceived(userData)
 
                 const userRole = response.data.role
                 if (userRole === 'admin') {
