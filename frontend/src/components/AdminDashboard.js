@@ -10,6 +10,12 @@ const AdminDashboard = () => {
     const [showModal, setShowModal] = useState(false)
     const [modalMe, setModalMe] = useState(false)
 
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [gender, setGender] = useState('')
+    const [courses, setCourses] = useState('')
+    const [contact, setContact] = useState('')
+
     // const validData = useContext(AdminDataContext)
 
     const navigate = useNavigate()
@@ -25,6 +31,14 @@ const AdminDashboard = () => {
     }
 
     const handleMeAdmin = () => {
+        return setModalMe(!modalMe)
+    }
+
+    const handleMeCancel = () => {
+        return setModalMe(!modalMe)
+    }
+
+    const handleMeConfirm = () => {
         return setModalMe(!modalMe)
     }
 
@@ -49,34 +63,49 @@ const AdminDashboard = () => {
                     </Link>
 
                     {modalMe && (<main className="modal-me">
-                        <div className="profile">
+                        <div className="profile-modal">
                             <label className="label-firstName">
                                 FirstName:
-                                <input className="label-firstName-text" type="text" placeholder="Enter your first name" />
+                                <input className="label-firstName-text" type="text"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    placeholder="Enter your first name" />
 
 
                             </label>
                             <label className="label-lastName">
                                 LastName:
-                                <input className="label-lastName-text" type="text" placeholder="Enter your last name" />
+                                <input className="label-lastName-text" type="text"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    placeholder="Enter your last name" />
 
 
                             </label>
                             <label className="label-gender">
                                 Gender:
-                                <input className="label-gender-text" type="text" placeholder="Enter your gender" />
+                                <input className="label-gender-text" type="text"
+                                    value={gender}
+                                    onChange={(e) => setGender(e.target.value)}
+                                    placeholder="Enter your gender" />
 
 
                             </label>
                             <label className="label-courses">
                                 Courses:
-                                <input className="label-courses-text" type="text" placeholder="Enter your courses" />
+                                <input className="label-courses-text" type="text"
+                                    value={courses}
+                                    onChange={(e) => setCourses(e.target.value)}
+                                    placeholder="Enter your courses" />
 
 
                             </label>
                             <label className="label-contact">
                                 Contact:
-                                <input className="label-contact-text" type="number" placeholder="Enter your Phone Number" />
+                                <input className="label-contact-text" type="number"
+                                    value={contact}
+                                    onChange={(e) => setContact(e.target.value)}
+                                    placeholder="Enter your Phone Number" />
 
 
                             </label>
@@ -84,12 +113,12 @@ const AdminDashboard = () => {
 
                             <div className="admin-me-cta flex">
 
-                                <button onClick={handleMeAdmin} className="cancel-btn">Cancel</button>
+                                <button onClick={handleMeCancel} className="cancel-btn">Cancel</button>
 
 
 
-                                <button onClick={handleMeAdmin} className="confirm-btn">Confirm</button>
-
+                                <button onClick={handleMeConfirm} className="confirm-btn">Confirm</button>
+                                <p>{firstName}</p>
 
                             </div>
                         </div>
@@ -138,6 +167,14 @@ const AdminDashboard = () => {
                                                 UserName:
                                                 <p>sdsfsdf</p>
                                             </label>
+                                            <label className="content-name label">
+                                                Firstname:
+                                                <p>sdsfsdf</p>
+                                            </label>
+                                            <label className="content-name label">
+                                                LastName:
+                                                <p>sdsfsdf</p>
+                                            </label>
                                             <label className="content-email label">
                                                 Email:
                                                 <p>sdfsgsfga</p>
@@ -146,12 +183,14 @@ const AdminDashboard = () => {
                                                 Gender:
                                                 <p>sdfgSDGsgSFd</p>
                                             </label>
-                                            <label className="content-role label">
+
+                                            {/* <label className="content-role label">
                                                 Role:
                                                 <p>sdfgsdgfd</p>
-                                            </label>
+                                            </label> */}
+
                                             <label className="content-course label">
-                                                Course:
+                                                Course(s):
                                                 <p>dfsfasdfd</p>
                                             </label>
                                             <label className="content-phoneNo label">

@@ -7,6 +7,7 @@ import Report from './components/admin-sub/Report';
 import StudentDashboard from './components/StudentDashboard'
 import IndividualStu from './components/admin-sub/IndividualStu';
 import { useState } from 'react';
+import { AdminDataProvider } from './components/AdminDataContext';
 
 const App = () => {
   // to set and update data received from the authorization page...
@@ -22,24 +23,27 @@ const App = () => {
 
 
   return (
-    <div className="App">
-      <Router>
+    <AdminDataProvider>
+      <div className="App">
+        <Router>
 
-        <Routes>
-          <Route path='/' element={<Welcome />} />
+          <Routes>
+            <Route path='/' element={<Welcome />} />
 
-          <Route path='/auth' element={<Auth dataReceived={handleDataForStudent} />} />
+            <Route path='/auth' element={<Auth dataReceived={handleDataForStudent} />} />
 
-          <Route path='/login' element={<Login dataReceived={handleDataForStudent} />} />
+            <Route path='/login' element={<Login dataReceived={handleDataForStudent} />} />
 
-          <Route path='/auth/admin' element={<AdminDashboard />} />
-          <Route path='/auth/admin/report' element={<Report />} />
-          <Route path={`/auth/admin/report/:studentId`} element={<IndividualStu />} />
+            <Route path='/auth/admin' element={<AdminDashboard />} />
+            <Route path='/auth/admin/report' element={<Report />} />
+            <Route path={`/auth/admin/report/:studentId`} element={<IndividualStu />} />
 
-          <Route path='/auth/student' element={<StudentDashboard authDetails={dataFromAuth} > <Report /> </StudentDashboard>} />
-        </Routes>
-      </Router>
-    </div>
+            <Route path='/auth/student' element={<StudentDashboard authDetails={dataFromAuth} />} />
+          </Routes>
+        </Router>
+      </div>
+    </AdminDataProvider>
+
   );
 }
 

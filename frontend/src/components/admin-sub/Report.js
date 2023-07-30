@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import AdminDataContext from '../AdminDataContext';
 
 const Report = () => {
-    const validStudents = useContext(AdminDataContext)
+    const { validStudent } = useContext(AdminDataContext)
 
     // const studentsList = [
     //     {
@@ -27,16 +27,16 @@ const Report = () => {
 
             <main className='student-list'>
                 {/* function to map through list of students offering a course... */}
-                {validStudents?.length > 0 ? (
+                {validStudent?.length > 0 ? (
                     <p>No Students Yet</p>
                 ) : (
                     <>
-                        {validStudents?.map((validStudent, index) => (
+                        {validStudent?.map((validStu, index) => (
                             <Link to={`/auth/admin/report/${validStudent.id}`} className='student-links' key={index} >
 
                                 <li className='student'>
-                                    <h3>{validStudent.userName}</h3>
-                                    <p>{validStudent.regNo}</p>
+                                    <h3>{validStu.userName}</h3>
+                                    <p>{validStu.regNo}</p>
                                 </li>
 
                             </Link>

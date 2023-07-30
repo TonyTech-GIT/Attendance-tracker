@@ -2,7 +2,7 @@ import DashBtn from "./DashBtn"
 import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose, faExclamationCircle, faUser } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import axios from "axios"
 import AdminDataContext from "./AdminDataContext"
 
@@ -29,7 +29,9 @@ const StudentDashboard = ({ authDetails, children }) => {
     const [homeAddress, setHomeAddress] = useState('')
     const [secondContact, setSecondContact] = useState('')
 
-    const [validStudent, setValidStudent] = useState([])
+    const { setValidStudent } = useContext(AdminDataContext)
+
+    // const [validStudent, setValidStudent] = useState([])
 
     const navigate = useNavigate()
 
@@ -53,6 +55,7 @@ const StudentDashboard = ({ authDetails, children }) => {
         axios
             .get('http://localhost:5000/auth/studentReg')
             .then((response) => {
+
                 setValidStudent(response.data)
 
                 const testData = response.data
@@ -471,9 +474,9 @@ const StudentDashboard = ({ authDetails, children }) => {
 
             </section>
 
-            <AdminDataContext.Provider value={validStudent}>
+            {/* <AdminDataContext.Provider value={validStudent}>
                 {children}
-            </AdminDataContext.Provider>
+            </AdminDataContext.Provider> */}
 
             {/* STUDENT BODY SECTION END... */}
         </div>
