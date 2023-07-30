@@ -6,7 +6,7 @@ import { useState } from "react"
 
 // import AdminDataContext from "./AdminDataContext"
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ authDetails }) => {
     const [showModal, setShowModal] = useState(false)
     const [modalMe, setModalMe] = useState(false)
 
@@ -35,7 +35,7 @@ const AdminDashboard = () => {
     }
 
     const handleMeCancel = () => {
-        return setModalMe(!modalMe)
+        setModalMe(!modalMe)
     }
 
     const handleMeConfirm = () => {
@@ -165,23 +165,23 @@ const AdminDashboard = () => {
                                         <div className="label-info">
                                             <label className="content-name label">
                                                 UserName:
-                                                <p>sdsfsdf</p>
+                                                <p>{authDetails.userName}</p>
                                             </label>
                                             <label className="content-name label">
                                                 Firstname:
-                                                <p>sdsfsdf</p>
+                                                <p>{firstName}</p>
                                             </label>
                                             <label className="content-name label">
                                                 LastName:
-                                                <p>sdsfsdf</p>
+                                                <p>{lastName}</p>
                                             </label>
                                             <label className="content-email label">
                                                 Email:
-                                                <p>sdfsgsfga</p>
+                                                <p>{authDetails.email}</p>
                                             </label>
                                             <label className="content-gender label">
                                                 Gender:
-                                                <p>sdfgSDGsgSFd</p>
+                                                <p>{gender}</p>
                                             </label>
 
                                             {/* <label className="content-role label">
@@ -191,11 +191,11 @@ const AdminDashboard = () => {
 
                                             <label className="content-course label">
                                                 Course(s):
-                                                <p>dfsfasdfd</p>
+                                                <p>{courses}</p>
                                             </label>
                                             <label className="content-phoneNo label">
                                                 Contact:
-                                                <p>adfSfgSDg</p>
+                                                <p>{contact}</p>
                                             </label>
                                         </div>
 

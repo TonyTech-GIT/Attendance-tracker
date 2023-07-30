@@ -34,7 +34,7 @@ const App = () => {
 
             <Route path='/login' element={<Login dataReceived={handleDataForStudent} />} />
 
-            <Route path='/auth/admin' element={<AdminDashboard />} />
+            <Route path='/auth/admin' element={<AdminDashboard authDetails={dataFromAuth} />} />
             <Route path='/auth/admin/report' element={<Report />} />
             <Route path={`/auth/admin/report/:studentId`} element={<IndividualStu />} />
 
