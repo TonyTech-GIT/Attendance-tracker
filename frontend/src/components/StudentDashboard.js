@@ -2,16 +2,15 @@ import DashBtn from "./DashBtn"
 import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose, faExclamationCircle, faUser } from "@fortawesome/free-solid-svg-icons"
-import { useState, useContext } from "react"
+import { useState } from "react"
 import axios from "axios"
-import AdminDataContext from "./AdminDataContext"
+import Report from "./admin-sub/Report"
 
 
 
-const StudentDashboard = ({ authDetails, children }) => {
+const StudentDashboard = ({ authDetails, validStudentData }) => {
 
 
-    // const { studentData } = useContext(AuthContext)
 
     const [showModal, setShowModal] = useState(false)
     const [modalMe, setModalMe] = useState(false)
@@ -29,9 +28,9 @@ const StudentDashboard = ({ authDetails, children }) => {
     const [homeAddress, setHomeAddress] = useState('')
     const [secondContact, setSecondContact] = useState('')
 
-    const { setValidStudent } = useContext(AdminDataContext)
 
-    // const [validStudent, setValidStudent] = useState([])
+    const [dataStuTest, setDataStuTest] = useState(null)
+
 
     const navigate = useNavigate()
 
@@ -56,13 +55,18 @@ const StudentDashboard = ({ authDetails, children }) => {
             .get('http://localhost:5000/auth/studentReg')
             .then((response) => {
 
-                setValidStudent(response.data)
-
                 const testData = response.data
 
-                console.log(testData)
+                validStudentData(dataStuTest)
 
-                // console.log(validStudent);
+                setDataStuTest(testData)
+
+                // console.log(dataStuTest);
+
+                console.log('from student dashBoard', dataStuTest);
+
+                // console.log(testData)
+
             })
             .catch((err) => {
                 console.log("Error fetching data", err)
@@ -72,12 +76,12 @@ const StudentDashboard = ({ authDetails, children }) => {
 
 
 
-        if (authDetails) {
-            console.log(authDetails)
-            console.log(authDetails.userName)
-        } else {
-            console.log('ygugiyho')
-        }
+        // if (authDetails) {
+        //     console.log(authDetails)
+        //     console.log(authDetails.userName)
+        // } else {
+        //     console.log('ygugiyho')
+        // }
 
 
         const studentData = {
@@ -120,7 +124,11 @@ const StudentDashboard = ({ authDetails, children }) => {
             .post('http://localhost:5000/auth/studentReg', studentData)
             .then((response) => {
 
-                console.log(response.data)
+                // console.log(response.data)
+
+                const validDataValue = response.data
+
+                validStudentData(validDataValue)
                 alert('Student registered successfully!')
                 return setErrorMessage('')
             })
@@ -471,6 +479,8 @@ const StudentDashboard = ({ authDetails, children }) => {
 
                     </div>
                 </aside>
+
+                {dataStuTest.length > 0 && <Report testDataOne={dataStuTest} />}
 
             </section>
 

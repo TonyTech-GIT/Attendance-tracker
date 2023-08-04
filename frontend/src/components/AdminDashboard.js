@@ -118,7 +118,6 @@ const AdminDashboard = ({ authDetails }) => {
 
 
                                 <button onClick={handleMeConfirm} className="confirm-btn">Confirm</button>
-                                <p>{firstName}</p>
 
                             </div>
                         </div>
