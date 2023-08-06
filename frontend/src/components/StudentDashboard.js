@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose, faExclamationCircle, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import axios from "axios"
-import Report from "./admin-sub/Report"
+// import Report from "./admin-sub/Report"
 
 
 
-const StudentDashboard = ({ authDetails, validStudentData }) => {
+const StudentDashboard = ({ authDetails }) => {
 
 
 
@@ -51,13 +51,14 @@ const StudentDashboard = ({ authDetails, validStudentData }) => {
     const handleMeConfirm = () => {
 
         // axios GET request for valid students...
+
         axios
             .get('http://localhost:5000/auth/studentReg')
             .then((response) => {
 
                 const testData = response.data
 
-                validStudentData(dataStuTest)
+                // validStudentData(dataStuTest)
 
                 setDataStuTest(testData)
 
@@ -126,9 +127,9 @@ const StudentDashboard = ({ authDetails, validStudentData }) => {
 
                 // console.log(response.data)
 
-                const validDataValue = response.data
+                // const validDataValue = response.data
 
-                validStudentData(validDataValue)
+                // validStudentData(validDataValue)
                 alert('Student registered successfully!')
                 return setErrorMessage('')
             })
@@ -480,7 +481,7 @@ const StudentDashboard = ({ authDetails, validStudentData }) => {
                     </div>
                 </aside>
 
-                {dataStuTest.length > 0 && <Report testDataOne={dataStuTest} />}
+                {/* {<Report testDataOne={dataStuTest} />} */}
 
             </section>
 

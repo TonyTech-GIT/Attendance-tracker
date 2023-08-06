@@ -2,56 +2,37 @@ import React, { useState } from 'react'
 
 import { Link } from 'react-router-dom';
 
-import { useEffect } from 'react';
+import axios from 'axios'
 // import { useNavigate } from 'react-router-dom'
-// import AdminDataContext from '../AdminDataContext';
 
-const Report = ({ validStudentsReceived, testRun, testDataOne }) => {
-    // const { validStudent } = useContext(AdminDataContext)
+const Report = () => {
 
-    const [loading, setLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
+
+    const [getStudentsData, setGetStudentsData] = useState(null)
 
 
     const testBtn = () => {
 
-        // console.log(validStudentsReceived)
-        console.log('from report component', testDataOne);
-        // console.log(testRun)
-        // if (validStudentsReceived && validStudentsReceived?.length > 0) {
-        //     setLoading(false)
-        //     console.log(validStudentsReceived)
+        setIsLoading(true)
+        axios
+            .get('http://localhost:5000/auth/studentReg')
+            .then((res) => {
+                console.log("data", res.data)
 
-        // } else {
-        //     console.log('hello world');
-        // }
+                setGetStudentsData(res.data)
+
+                console.log('hyvyfyufy', getStudentsData)
+                setIsLoading(false)
+
+
+            })
+            .catch((err) => {
+                alert(`Error ${err}`)
+            })
+
+
     }
-
-    // console.log('useEffect student data', validStudentsReceived);
-
-
-
-    useEffect(() => {
-        // Check if data is received
-
-        if (testDataOne) {
-            // setLoading(false)
-            console.log('useEffect student data', testDataOne);
-
-        }
-
-    }, [testDataOne]);
-
-    // const studentsList = [
-    //     {
-    //         id: 1, name: "John Doe", subject: 'Math'
-    //     },
-    //     {
-    //         id: 2, name: "Mark Bro", subject: "Science"
-    //     }
-    // ]
-
-
-
 
 
     return (
@@ -60,28 +41,26 @@ const Report = ({ validStudentsReceived, testRun, testDataOne }) => {
 
             <header className='report-header'>Students Reports</header>
 
-            <button onClick={testBtn}>
-                Click me
+            <button className='reportBtn' onClick={testBtn}>
+                Generate Students
             </button>
 
             <main className='student-list'>
                 {/* function to map through list of students offering a course... */}
-                {loading ? (
+                {isLoading ? (
                     <p>Loading...</p>
-                ) : validStudentsReceived?.length > 0 ? (
-                    validStudentsReceived?.map((validStudentReceived, index) => (
-                        <Link to={`/auth/admin/report/${validStudentReceived.id}`} className='student-links' key={index} >
+                ) : getStudentsData?.length > 0 ? (
+                    getStudentsData?.map((getStudentData, index) => (
+                        <Link to={`/auth/admin/report/${getStudentData._id}`} className='student-links' key={index} >
 
                             <li className='student'>
-                                <h3>{validStudentReceived.userName}</h3>
-                                <p>{validStudentReceived.regNo}</p>
+                                <h3>{getStudentData.firstName}</h3>
+                                <p>{getStudentData.regNo}</p>
                             </li>
 
                         </Link>
                     ))
-                    // <>
 
-                    // </>
                 ) : (
                     <p>No student yet..</p>
                 )}

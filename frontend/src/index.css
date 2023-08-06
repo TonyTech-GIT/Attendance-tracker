@@ -400,6 +400,21 @@ body{
       font-weight: bold;
     }
 
+    .reportBtn {
+      margin: 1.5em 0 1em 1em;
+      padding: .5em;
+      cursor: pointer;
+      border: none;
+      border-radius: 2px;
+      background-color: #1d3557;
+      color: #eee;
+      transition: all 300ms ease-in-out;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+
     .student-list{
 
       .student-links{
