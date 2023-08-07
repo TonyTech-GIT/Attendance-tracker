@@ -51,7 +51,7 @@ const Report = () => {
                     <p>Loading...</p>
                 ) : getStudentsData?.length > 0 ? (
                     getStudentsData?.map((getStudentData, index) => (
-                        <Link to={`/auth/admin/report/${getStudentData._id}`} className='student-links' key={index} >
+                        <Link to={`/auth/admin/report/${getStudentData.firstName}`} className='student-links' key={index} >
 
                             <li className='student'>
                                 <h3>{getStudentData.firstName}</h3>
@@ -65,24 +65,6 @@ const Report = () => {
                     <p>No student yet..</p>
                 )}
 
-                {/* {studentsList.length === 0 ? (
-                    <p>No Students Yet</p>
-                ) : (
-                    <>
-                        {studentsList.map((studentsLi, index) => (
-                            <Link to={`/auth/admin/report/${studentsLi.id}`} className='student-links' key={index} >
-
-                                <li className='student'>
-                                    <h3>{studentsLi.name}</h3>
-                                    <p>{studentsLi.subject}</p>
-                                </li>
-
-                            </Link>
-                        ))}
-
-
-                    </>
-                )} */}
 
             </main>
         </section>

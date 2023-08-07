@@ -46,6 +46,10 @@ const AdminDashboard = ({ authDetails }) => {
         navigate('/auth/admin/report')
     }
 
+    const navigateAttendancePage = () => {
+        navigate('/auth/admin/attendance')
+    }
+
     return (
         <div className="admin-dash">
             {/* ADMIN HEADER SECTION STARTS... */}
@@ -153,7 +157,7 @@ const AdminDashboard = ({ authDetails }) => {
 
 
 
-                            <li>Attendance</li>
+                            <li onClick={navigateAttendancePage}>Attendance</li>
                             <li>Courses</li>
                             <li>Student Profile</li>
 

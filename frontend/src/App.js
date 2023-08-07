@@ -7,6 +7,7 @@ import Report from './components/admin-sub/Report';
 import StudentDashboard from './components/StudentDashboard'
 import IndividualStu from './components/admin-sub/IndividualStu';
 import { useState } from 'react';
+import Attendance from './components/admin-sub/Attendance';
 // import { AdminDataProvider } from './components/AdminDataContext';
 
 const App = () => {
@@ -47,6 +48,8 @@ const App = () => {
           <Route path='/auth/admin' element={<AdminDashboard authDetails={dataFromAuth} />} />
           <Route path='/auth/admin/report' element={<Report />} />
           <Route path={`/auth/admin/report/:studentId`} element={<IndividualStu />} />
+          <Route path={`/auth/admin/attendance`} element={<Attendance />} />
+
 
           <Route path='/auth/student' element={<StudentDashboard authDetails={dataFromAuth} />} />
         </Routes>

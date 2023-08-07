@@ -450,6 +450,43 @@ body{
   }
 /* ADMIN-LEFT REPORT PAGE END... */
 
+/* ADMIN-LEFT ATTENDANCE PAGE START */
+.attendance-section {
+
+  .table-container{
+    border: 1px solid yellow;
+    margin: 30px;
+    /* width: 100%; */
+    > table, tr,th, td{
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 0.25em;
+    }
+
+    .table-body{
+      > tr td button {
+        padding: .15em;
+        cursor: pointer;
+
+        &:not(:last-child){
+          margin-right: 1.5em;
+        }
+      }
+    }
+
+    
+    
+  }
+}
+
+
+
+
+
+
+
+/* ADMIN-LEFT ATTENDANCE PAGE START */
+
 /* ADMIN-MAIN... */
 
 .admin-body-section .admin-main{
