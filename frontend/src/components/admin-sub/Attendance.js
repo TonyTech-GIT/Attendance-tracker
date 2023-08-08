@@ -1,5 +1,23 @@
+import { useState } from "react"
 
 const Attendance = () => {
+
+    const [incrementPresent, setIncrementPresent] = useState(0)
+    const [incrementAbsent, setIncrementAbsent] = useState(0)
+
+    const handleButtonPresent = () => {
+        setIncrementPresent(incrementPresent + 1)
+    }
+
+    const handleButtonAbsent = () => {
+        setIncrementAbsent(incrementAbsent + 1)
+    }
+
+    const handleResetButton = () => {
+        setIncrementPresent(0)
+
+        setIncrementAbsent(0)
+    }
     return (
         <section className='attendance-section'>
             <h1>Where attendance is taken....</h1>
@@ -24,11 +42,13 @@ const Attendance = () => {
                             <td>Doe</td>
                             <td>18/CMP/100234</td>
                             <td>
-                                <button>Present</button>
-                                <button>Absent</button>
+                                <button onClick={handleButtonPresent}>Present</button>
+                                <button onClick={handleButtonAbsent}>Absent</button>
+                                <button onClick={handleResetButton}>Reset</button>
                             </td>
                             <td>
-                                <label><b>Present:</b></label> <span>0</span> <label><b>Absent:</b></label> <span>0</span>
+                                <label><b>Present:</b></label> <span>{incrementPresent}</span>
+                                <label><b>Absent:</b></label> <span>{incrementAbsent}</span>
                             </td>
 
                         </tr>
@@ -38,11 +58,12 @@ const Attendance = () => {
                             <td>Raquel</td>
                             <td>18/STAT/103021</td>
                             <td>
-                                <button>Present</button>
-                                <button>Absent</button>
+                                <button onClick={handleButtonPresent}>Present</button>
+                                <button onClick={handleButtonAbsent}>Absent</button>
+                                <button onClick={handleResetButton}>Reset</button>
                             </td>
                             <td>
-                                <label><b>Present:</b></label> <span>0</span> <label><b>Absent:</b></label> <span>0</span>
+                                <label><b>Present:</b></label> <span>{incrementPresent}</span> <label><b>Absent:</b></label> <span>{incrementAbsent}</span>
                             </td>
                         </tr>
                     </tbody>

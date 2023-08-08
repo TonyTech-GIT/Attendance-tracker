@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
+// import TextField from '@material-ui/core/TextField'
+// import AutoComplete from '@material-ui/lab/Autocomplete'
 
 // import AdminDataContext from "./AdminDataContext"
 
@@ -13,8 +15,10 @@ const AdminDashboard = ({ authDetails }) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [gender, setGender] = useState('')
-    const [courses, setCourses] = useState('')
+    const [courses, setCourses] = useState([])
     const [contact, setContact] = useState('')
+
+    // const options = ['CSC 442', 'CSC 414', 'CSC 422']
 
     // const validData = useContext(AdminDataContext)
 
@@ -49,6 +53,22 @@ const AdminDashboard = ({ authDetails }) => {
     const navigateAttendancePage = () => {
         navigate('/auth/admin/attendance')
     }
+
+    const handleCourseSelection = (course) => {
+        if (courses.includes(course)) {
+            setCourses(courses.filter(selected => selected !== course))
+        } else {
+            setCourses([...courses, course])
+        }
+    }
+
+    // const handleCourseSelection = (e) => {
+    //     const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value)
+
+    //     setCourses(selectedOptions)
+    // }
+
+
 
     return (
         <div className="admin-dash">
@@ -95,15 +115,54 @@ const AdminDashboard = ({ authDetails }) => {
 
 
                             </label>
-                            <label className="label-courses">
+
+                            <label htmlFor='options' className="label-courses">
                                 Courses:
-                                <input className="label-courses-text" type="text"
+
+
+
+                                {/* <select className="label-courses-text" name="options"
+                                    multiple={true}
+                                    value={courses}
+                                    onChange={handleCourseSelection}>
+                                    <option value="CSC 442">CSC 442</option>
+                                    <option value="CSC 414">CSC 414</option>
+                                    <option value="CSC 422">CSC 422</option>
+                                    <option value="CSC 411">CSC 411</option>
+                                    <option value="CSC 421">CSC 421</option>
+                                </select> */}
+                                {/* <input className="label-courses-text" type="text"
                                     value={courses}
                                     onChange={(e) => setCourses(e.target.value)}
-                                    placeholder="Enter your courses" />
+                                    placeholder="Enter your courses" /> */}
 
+                                <label  >
+                                    CSC 442
+                                    <input type="checkbox"
+                                        value='CSC 442'
+                                        onChange={() => handleCourseSelection('CSC 442')} />
+
+                                </label>
+
+                                <label>
+                                    CSC 414
+                                    <input type="checkbox"
+                                        value='CSC 414'
+                                        onChange={() => handleCourseSelection('CSC 414')} />
+
+                                </label>
+
+                                <label>
+                                    CSC 422
+                                    <input type="checkbox"
+                                        value='CSC 422'
+                                        onChange={() => handleCourseSelection('CSC 422')} />
+
+                                </label>
 
                             </label>
+
+
                             <label className="label-contact">
                                 Contact:
                                 <input className="label-contact-text" type="number"
@@ -171,7 +230,7 @@ const AdminDashboard = ({ authDetails }) => {
                                                 <p>{authDetails.userName}</p>
                                             </label>
                                             <label className="content-name label">
-                                                Firstname:
+                                                FirstName:
                                                 <p>{firstName}</p>
                                             </label>
                                             <label className="content-name label">
@@ -194,7 +253,7 @@ const AdminDashboard = ({ authDetails }) => {
 
                                             <label className="content-course label">
                                                 Course(s):
-                                                <p>{courses}</p>
+                                                <p>{courses.join(', ')}</p>
                                             </label>
                                             <label className="content-phoneNo label">
                                                 Contact:

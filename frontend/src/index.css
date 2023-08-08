@@ -321,6 +321,17 @@ body{
     margin:  5vh auto;
     border-radius: 0;
     padding: 1em 1em;
+
+    >.label-courses{
+      
+      & label{
+        margin-left: 2.5em;
+
+        &:nth-child(2), &:nth-child(3){
+          margin-left: 1em;
+        }
+      }
+    }
   
     >label{
       display: flex;
@@ -335,6 +346,8 @@ body{
           outline: none;
         }
       }
+
+      
   
       & .label-firstName-text, .label-lastName-text{
         margin-left: 1.8em;
@@ -345,8 +358,9 @@ body{
       }
   
       & .label-courses-text, .label-contact-text{
-        margin-left: 3.2em;
+        margin-left: 2.8em;
       }
+
     }
   
     >label:not(:last-child){
