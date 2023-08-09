@@ -62,6 +62,8 @@ const AdminDashboard = ({ authDetails }) => {
         }
     }
 
+
+
     // const handleCourseSelection = (e) => {
     //     const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value)
 
