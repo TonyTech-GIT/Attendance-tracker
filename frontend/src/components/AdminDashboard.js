@@ -15,8 +15,11 @@ const AdminDashboard = ({ authDetails }) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [gender, setGender] = useState('')
-    const [courses, setCourses] = useState([])
+    // const [courses, setCourses] = useState(false)
     const [contact, setContact] = useState('')
+    const [course1, setCourse1] = useState(false)
+    const [course2, setCourse2] = useState(false)
+    const [course3, setCourse3] = useState(false)
 
     // const options = ['CSC 442', 'CSC 414', 'CSC 422']
 
@@ -40,6 +43,7 @@ const AdminDashboard = ({ authDetails }) => {
 
     const handleMeCancel = () => {
         setModalMe(!modalMe)
+        // console.log(courses)
     }
 
     const handleMeConfirm = () => {
@@ -54,14 +58,21 @@ const AdminDashboard = ({ authDetails }) => {
         navigate('/auth/admin/attendance')
     }
 
-    const handleCourseSelection = (course) => {
-        if (courses.includes(course)) {
-            setCourses(courses.filter(selected => selected !== course))
-        } else {
-            setCourses([...courses, course])
-        }
-    }
 
+
+    // const handleCourseSelection = () => {
+    //     console.log('hello world')
+
+    //     // console.log(courses)
+
+    //     setCourse1(!course1)
+
+    //     setCourse2(!course2)
+
+    //     setCourse3(!course3)
+
+
+    // }
 
 
     // const handleCourseSelection = (e) => {
@@ -141,24 +152,30 @@ const AdminDashboard = ({ authDetails }) => {
                                 <label  >
                                     CSC 442
                                     <input type="checkbox"
+                                        name='checkbox_1'
+                                        checked={course1}
                                         value='CSC 442'
-                                        onChange={() => handleCourseSelection('CSC 442')} />
+                                        onChange={() => setCourse1(!course1)} />
 
                                 </label>
 
                                 <label>
                                     CSC 414
                                     <input type="checkbox"
+                                        name="checkbox_2"
+                                        checked={course2}
                                         value='CSC 414'
-                                        onChange={() => handleCourseSelection('CSC 414')} />
+                                        onChange={() => setCourse2(!course2)} />
 
                                 </label>
 
                                 <label>
                                     CSC 422
                                     <input type="checkbox"
+                                        name="checkbox_3"
+                                        checked={course3}
                                         value='CSC 422'
-                                        onChange={() => handleCourseSelection('CSC 422')} />
+                                        onChange={() => setCourse3(!course3)} />
 
                                 </label>
 
@@ -255,7 +272,11 @@ const AdminDashboard = ({ authDetails }) => {
 
                                             <label className="content-course label">
                                                 Course(s):
-                                                <p>{courses.join(', ')}</p>
+                                                {course1 && <p>CSC 442</p>}
+                                                {course2 && <p>CSC 414</p>}
+                                                {course3 && <p>CSC 422</p>}
+
+
                                             </label>
                                             <label className="content-phoneNo label">
                                                 Contact:
