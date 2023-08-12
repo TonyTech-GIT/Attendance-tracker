@@ -20,11 +20,12 @@ const Report = () => {
             .then((res) => {
                 console.log("data", res.data)
 
-                setGetStudentsData(res.data)
+                const studentsWithValidCourse = res.data.filter(student => student.courses === "CSC 442")
+
+                setGetStudentsData(studentsWithValidCourse)
 
                 console.log('hyvyfyufy', getStudentsData)
                 setIsLoading(false)
-
 
             })
             .catch((err) => {
@@ -54,8 +55,9 @@ const Report = () => {
                         <Link to={`/auth/admin/report/${getStudentData.firstName}`} className='student-links' key={index} >
 
                             <li className='student'>
-                                <h3>{getStudentData.firstName}</h3>
-                                <p>{getStudentData.regNo}</p>
+                                <p><strong>FirstName:</strong> {getStudentData.firstName}</p>
+                                <p><strong>Reg Number:</strong> {getStudentData.regNo}</p>
+                                <p><strong>Course(s):</strong> {getStudentData.courses}</p>
                             </li>
 
                         </Link>

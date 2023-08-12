@@ -467,10 +467,23 @@ body{
 /* ADMIN-LEFT ATTENDANCE PAGE START */
 .attendance-section {
 
+  .attendance-btn{
+    background-color: #1d3557;
+    color: #eee;
+    margin: 1em 0 0 2.2em;
+    padding: .5em;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
   .table-container{
     border: 1px solid yellow;
     margin: 30px;
-    /* width: 100%; */
     > table, tr,th, td{
       border: 1px solid black;
       border-collapse: collapse;
