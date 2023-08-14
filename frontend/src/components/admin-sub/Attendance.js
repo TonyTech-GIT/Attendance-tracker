@@ -6,8 +6,8 @@ const Attendance = () => {
     const [studentLists, setStudentLists] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
-    // const [incrementStatus, setIncrementStatus] = useState([])
-    // const [decrementStatus, setDecrementStatus] = useState([])
+    // const [incrementStatus, setIncrementStatus] = useState(0)
+    // const [decrementStatus, setDecrementStatus] = useState(0)
 
 
 
@@ -17,11 +17,17 @@ const Attendance = () => {
             .then((res) => {
                 const attendanceData = res.data.filter(student => student.courses === "CSC 442")
 
-                setStudentLists(attendanceData)
+                const studentsWithAttendance = attendanceData.map(studentWithAttendance => ({
+                    ...studentWithAttendance,
+                    presentCount: 0,
+                    absentCount: 0
+                }))
+
+                setStudentLists(studentsWithAttendance)
 
                 setIsLoading(false)
 
-                console.log('students lists fetched', studentLists);
+                console.log('students lists fetched', studentsWithAttendance);
             })
             .catch((err) => {
                 console.log('Error fetching students list', err);
@@ -29,24 +35,25 @@ const Attendance = () => {
             })
     }
 
-    const handleButtonPresent = (listIndex, studentIndex) => {
-        // setIncrementPresent(incrementPresent + 1)
+    const handleButtonPresent = (studentIndex) => {
         setStudentLists(prevLists => {
             const updatedLists = [...prevLists];
-            updatedLists[listIndex].students[studentIndex].presentCount++;
+            updatedLists[studentIndex].presentCount++;
 
             return updatedLists
         })
+
+        // setIncrementStatus(incrementStatus + 1)
     }
 
-    const handleButtonAbsent = (listIndex, studentIndex) => {
-        // setIncrementAbsent(incrementAbsent + 1)
+    const handleButtonAbsent = (studentIndex) => {
         setStudentLists(prevLists => {
             const updatedLists = [...prevLists]
-            updatedLists[listIndex].students[studentIndex].absentCount++;
+            updatedLists[studentIndex].absentCount++;
 
             return updatedLists
         })
+        // setDecrementStatus(decrementStatus + 1)
     }
 
     const handleResetButton = () => {
@@ -54,16 +61,19 @@ const Attendance = () => {
 
         // setIncrementAbsent(0)
 
-        const resetLists = studentLists.map(studentList => ({
-            ...studentList,
-            students: studentList.student.map(student => ({
-                ...student,
-                presentCount: 0,
-                absentCount: 0
-            }))
-        }))
+        // const resetLists = studentLists.map(studentList => ({
+        //     ...studentList,
+        //     students: studentList.student.map(student => ({
+        //         ...student,
+        //         presentCount: 0,
+        //         absentCount: 0
+        //     }))
+        // }))
 
-        setStudentLists(resetLists)
+        // setStudentLists(resetLists)
+
+        // setDecrementStatus(0)
+        // setIncrementStatus(0)
     }
 
 
@@ -104,11 +114,11 @@ const Attendance = () => {
                                             <td>{studentList.lastName}</td>
                                             <td>{studentList.regNo}</td>
                                             <td>
-                                                <button onClick={handleButtonPresent}>Present</button>
-                                                <button onClick={handleButtonAbsent}>Absent</button>
+                                                <button onClick={() => handleButtonPresent(index)}>Present</button>
+                                                <button onClick={() => handleButtonAbsent(index)}>Absent</button>
                                                 <button onClick={handleResetButton}>Reset</button>
                                             </td>
-                                            <td><b>Present:</b> <span>{studentList.students[index].presentCount}</span> <b>Absent:</b> <span>{studentList.students[index].presentCount}</span> </td>
+                                            <td><b>Present:</b> <span>{studentList.presentCount}</span> <b>Absent:</b> <span>{studentList.absentCount}</span> </td>
                                         </tr>
                                     ))}
 
