@@ -6,8 +6,7 @@ const Attendance = () => {
     const [studentLists, setStudentLists] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
-    // const [incrementStatus, setIncrementStatus] = useState(0)
-    // const [decrementStatus, setDecrementStatus] = useState(0)
+    const [selectedStudentIndex, setSelectedStudentIndex] = useState(null)
 
 
 
@@ -43,7 +42,6 @@ const Attendance = () => {
             return updatedLists
         })
 
-        // setIncrementStatus(incrementStatus + 1)
     }
 
     const handleButtonAbsent = (studentIndex) => {
@@ -53,27 +51,25 @@ const Attendance = () => {
 
             return updatedLists
         })
-        // setDecrementStatus(decrementStatus + 1)
     }
 
-    const handleResetButton = () => {
-        // setIncrementPresent(0)
+    const handleResetButton = (studentIndex) => {
 
-        // setIncrementAbsent(0)
+        setStudentLists(prevLists => {
+            const updatedLists = [...prevLists]
+            updatedLists[studentIndex].presentCount = 0;
+            updatedLists[studentIndex].absentCount = 0;
 
-        // const resetLists = studentLists.map(studentList => ({
-        //     ...studentList,
-        //     students: studentList.student.map(student => ({
-        //         ...student,
-        //         presentCount: 0,
-        //         absentCount: 0
-        //     }))
-        // }))
+            return updatedLists
+        })
 
-        // setStudentLists(resetLists)
 
-        // setDecrementStatus(0)
-        // setIncrementStatus(0)
+    }
+
+    const calcAveragePercentage = (presentCount, absentCount, totalDays) => {
+        const totalClasses = presentCount + absentCount;
+
+        return (presentCount / totalClasses) * 100;
     }
 
 
@@ -116,9 +112,35 @@ const Attendance = () => {
                                             <td>
                                                 <button onClick={() => handleButtonPresent(index)}>Present</button>
                                                 <button onClick={() => handleButtonAbsent(index)}>Absent</button>
-                                                <button onClick={handleResetButton}>Reset</button>
+                                                <button onClick={() => handleResetButton(index)}>Reset</button>
                                             </td>
                                             <td><b>Present:</b> <span>{studentList.presentCount}</span> <b>Absent:</b> <span>{studentList.absentCount}</span> </td>
+                                            <td>{selectedStudentIndex === index && <>
+                                                {calcAveragePercentage(
+                                                    studentList.presentCount,
+                                                    studentList.absentCount,
+                                                    5 // Assuming 5 days
+                                                ).toFixed(2)}
+                                                % </>}
+
+                                            </td>
+                                            <button className="atn-btn" onClick={() => setSelectedStudentIndex(index)}>Get Rate</button>
+
+
+
+                                            {/* <>{selectedStudentIndex === index ? (
+                                                <td>
+                                                    {calcAveragePercentage(
+                                                        studentList.presentCount,
+                                                        studentList.absentCount,
+                                                        5 // Assuming 5 days
+                                                    ).toFixed(2)}
+                                                    %
+                                                </td>
+                                            ) : (
+                                                <button className="atn-btn" onClick={() => setSelectedStudentIndex(index)}>Get Rate</button>
+                                            )}</> */}
+
                                         </tr>
                                     ))}
 
