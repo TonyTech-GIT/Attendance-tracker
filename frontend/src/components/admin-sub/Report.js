@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,42 @@ const Report = () => {
 
     const [isLoading, setIsLoading] = useState(false)
 
-    const [getStudentsData, setGetStudentsData] = useState(null)
+    const [getStudentsData, setGetStudentsData] = useState()
+
+
+    // Load data from local storage on component mount...
+    useEffect(() => {
+        const storedData = localStorage.getItem('studentsData')
+
+
+        if (storedData) {
+
+            setGetStudentsData(JSON.parse(storedData).students)
+
+
+
+            const storedTimestamp = JSON.parse(storedData).timestamp
+            const currentTime = new Date().getTime()
+            const elapsedTime = currentTime - storedTimestamp
+
+
+            const dateExpirationTime = 60 * 60 * 1000 // 1hour in milliseconds
+            const remainingTime = dateExpirationTime - elapsedTime
+
+
+            if (remainingTime > 0) {
+                setTimeout(() => {
+                    localStorage.removeItem('studentsData');
+                    setGetStudentsData([]);
+                }, remainingTime);
+            } else {
+                localStorage.removeItem('studentsData')
+                setGetStudentsData([])
+            }
+
+        }
+
+    }, [])
 
 
     const testBtn = () => {
@@ -23,6 +58,16 @@ const Report = () => {
                 const studentsWithValidCourse = res.data.filter(student => student.courses === "CSC 442")
 
                 setGetStudentsData(studentsWithValidCourse)
+
+                const dataToStore = {
+                    students: studentsWithValidCourse,
+                    timestamp: new Date().getTime() // Stores the current timestamp
+                }
+
+                // Store data in local storage along with timestamp...
+                localStorage.setItem('studentsData', JSON.stringify(dataToStore))
+
+                console.log(dataToStore)
 
                 console.log('hyvyfyufy', getStudentsData)
                 setIsLoading(false)
@@ -52,7 +97,16 @@ const Report = () => {
                     <p>Loading...</p>
                 ) : getStudentsData?.length > 0 ? (
                     getStudentsData?.map((getStudentData, index) => (
-                        <Link to={`/auth/admin/report/${getStudentData.firstName}`} className='student-links' key={index} >
+                        <Link to={
+                            // `/auth/admin/report/${getStudentData.firstName}`
+
+                            {
+                                pathname: `/auth/admin/report/${getStudentData.firstName}`,
+                                state: { studentData: getStudentData }
+                            }
+                        }
+                            className='student-links'
+                            key={index} >
 
                             <li className='student'>
                                 <p><strong>FirstName:</strong> {getStudentData.firstName}</p>

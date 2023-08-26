@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from 'axios'
 
 const Attendance = () => {
@@ -9,8 +9,44 @@ const Attendance = () => {
     const [selectedStudentIndex, setSelectedStudentIndex] = useState(null)
 
 
+    // Load data from local storage on component mount...
+    useEffect(() => {
+        const storedData = localStorage.getItem('attendanceData')
+
+
+        if (storedData) {
+
+            setStudentLists(JSON.parse(storedData).students)
+
+
+
+            const storedTimestamp = JSON.parse(storedData).timestamp
+            const currentTime = new Date().getTime()
+            const elapsedTime = currentTime - storedTimestamp
+
+
+            const dateExpirationTime = 60 * 60 * 1000 // 1hour in milliseconds
+            const remainingTime = dateExpirationTime - elapsedTime
+
+
+            if (remainingTime > 0) {
+                setTimeout(() => {
+                    localStorage.removeItem('studentsData');
+                    setStudentLists([]);
+                }, remainingTime);
+            } else {
+                localStorage.removeItem('studentsData')
+                setStudentLists([])
+            }
+
+        }
+
+    }, [])
+
 
     const handleAttendanceList = () => {
+
+        setIsLoading(true)
         axios
             .get('http://localhost:5000/auth/studentReg')
             .then((res) => {
@@ -19,10 +55,21 @@ const Attendance = () => {
                 const studentsWithAttendance = attendanceData.map(studentWithAttendance => ({
                     ...studentWithAttendance,
                     presentCount: 0,
-                    absentCount: 0
+                    absentCount: 0,
+                    attendanceRate: 0 // Start with 0
                 }))
 
                 setStudentLists(studentsWithAttendance)
+
+                const dataToStore = {
+                    students: studentsWithAttendance,
+                    timestamp: new Date().getTime() // Stores the current timestamp
+                }
+
+                // Store data in local storage along with timestamp...
+                localStorage.setItem('attendanceData', JSON.stringify(dataToStore))
+
+                console.log(dataToStore)
 
                 setIsLoading(false)
 
@@ -30,7 +77,7 @@ const Attendance = () => {
             })
             .catch((err) => {
                 console.log('Error fetching students list', err);
-                setIsLoading(false)
+                // setIsLoading(false)
             })
     }
 
@@ -38,6 +85,12 @@ const Attendance = () => {
         setStudentLists(prevLists => {
             const updatedLists = [...prevLists];
             updatedLists[studentIndex].presentCount++;
+            updatedLists[studentIndex].attendanceRate = calcAveragePercentage(
+                updatedLists[studentIndex].presentCount,
+                updatedLists[studentIndex].absentCount,
+                5
+            );
+
 
             return updatedLists
         })
@@ -48,6 +101,13 @@ const Attendance = () => {
         setStudentLists(prevLists => {
             const updatedLists = [...prevLists]
             updatedLists[studentIndex].absentCount++;
+            updatedLists[studentIndex].attendanceRate = calcAveragePercentage(
+                updatedLists[studentIndex].presentCount++,
+                updatedLists[studentIndex].absentCount++,
+                5 // Assuming 5 days
+
+            );
+
 
             return updatedLists
         })
@@ -59,6 +119,8 @@ const Attendance = () => {
             const updatedLists = [...prevLists]
             updatedLists[studentIndex].presentCount = 0;
             updatedLists[studentIndex].absentCount = 0;
+            updatedLists[studentIndex].attendanceRate = 0;
+
 
             return updatedLists
         })
@@ -82,53 +144,53 @@ const Attendance = () => {
             <main className="table-container">
                 {isLoading ? (
                     <p>Loading...</p>
+                ) : !isLoading && studentLists.length === 0 ? (
+                    <p>No attendance list yet...</p>
                 ) : (
-                    !isLoading && studentLists.length === 0 ? (<p>No attendance list yet...</p>
-                    ) : (
-                        <div>
+                    <div>
 
-                            <table >
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>RegNo</th>
-                                        <th>Status</th>
-                                        <th>Attendance</th>
-                                        <th>Rate / Percentage</th>
-                                    </tr>
-                                </thead>
+                        <table >
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>RegNo</th>
+                                    <th>Status</th>
+                                    <th>Attendance</th>
+                                    <th>Rate / Percentage</th>
+                                </tr>
+                            </thead>
 
-                                <tbody className='table-body'>
-                                    {studentLists.map((studentList, index) => (
+                            <tbody className='table-body'>
+                                {studentLists.map((studentList, index) => (
 
-                                        <tr key={index}>
-                                            {/* <td>{studentList.id}</td> */}
-                                            <td>{index + 1}</td>
-                                            <td>{studentList.firstName}</td>
-                                            <td>{studentList.lastName}</td>
-                                            <td>{studentList.regNo}</td>
-                                            <td>
-                                                <button onClick={() => handleButtonPresent(index)}>Present</button>
-                                                <button onClick={() => handleButtonAbsent(index)}>Absent</button>
-                                                <button onClick={() => handleResetButton(index)}>Reset</button>
-                                            </td>
-                                            <td><b>Present:</b> <span>{studentList.presentCount}</span> <b>Absent:</b> <span>{studentList.absentCount}</span> </td>
-                                            <td>{selectedStudentIndex === index && <>
-                                                {calcAveragePercentage(
-                                                    studentList.presentCount,
-                                                    studentList.absentCount,
-                                                    5 // Assuming 5 days
-                                                ).toFixed(2)}
-                                                % </>}
+                                    <tr key={index}>
+                                        {/* <td>{studentList.id}</td> */}
+                                        <td>{index + 1}</td>
+                                        <td>{studentList.firstName}</td>
+                                        <td>{studentList.lastName}</td>
+                                        <td>{studentList.regNo}</td>
+                                        <td>
+                                            <button onClick={() => handleButtonPresent(index)}>Present</button>
+                                            <button onClick={() => handleButtonAbsent(index)}>Absent</button>
+                                            <button onClick={() => handleResetButton(index)}>Reset</button>
+                                        </td>
+                                        <td><b>Present:</b> <span>{studentList.presentCount}</span> <b>Absent:</b> <span>{studentList.absentCount}</span> </td>
+                                        <td>{selectedStudentIndex === index && <>
+                                            {calcAveragePercentage(
+                                                studentList.presentCount,
+                                                studentList.absentCount,
+                                                5 // Assuming 5 days
+                                            ).toFixed(2)}
+                                            % </>}
 
-                                            </td>
-                                            <button className="atn-btn" onClick={() => setSelectedStudentIndex(index)}>Get Rate</button>
+                                        </td>
+                                        <button className="atn-btn" onClick={() => setSelectedStudentIndex(index)}>Get Rate</button>
 
 
 
-                                            {/* <>{selectedStudentIndex === index ? (
+                                        {/* <>{selectedStudentIndex === index ? (
                                                 <td>
                                                     {calcAveragePercentage(
                                                         studentList.presentCount,
@@ -141,13 +203,13 @@ const Attendance = () => {
                                                 <button className="atn-btn" onClick={() => setSelectedStudentIndex(index)}>Get Rate</button>
                                             )}</> */}
 
-                                        </tr>
-                                    ))}
+                                    </tr>
+                                ))}
 
-                                </tbody>
-                            </table>
-                        </div>
-                    )
+                            </tbody>
+                        </table>
+                    </div>
+
 
                 )}
 

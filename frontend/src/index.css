@@ -464,6 +464,96 @@ body{
   }
 /* ADMIN-LEFT REPORT PAGE END... */
 
+/* ADMIN-LEFT INDIVIDUAL STUDENT REPORT PAGE START */
+.student-report{
+  height: 500px;
+  width: 600px;
+  background-color: #ddd;
+  margin: 2em auto;
+  padding-inline: 1em;
+
+  >.header{
+    text-align: center;
+    padding-block: 1em;
+  }
+
+  >.report-text{
+    padding-block: 1em .8em;
+  }
+
+  >.report-form{
+
+
+    >.class-absent-container{
+      margin-block: 1em;
+    }
+
+    .class-present-container, .class-absent-container, .attendance-rate-container{
+
+      >input[type = text]{
+        margin-left: 1.8em;
+      }
+
+    }
+
+    .class-present-container{
+      >input[type = text]{
+        margin-left: 1.35em;
+      }
+    }
+
+    .attendance-rate-container{
+      >input[type = text]{
+        margin-left: .55em;
+      }
+    }
+
+    >.btn-container{
+      margin-top: 2em;
+      display: flex;
+      gap: 1em;
+
+      >.download-btn{
+        background-color: #c4bcbc;
+        padding: .4em;
+        border: none;
+        border-radius: 1px;
+        cursor: pointer;
+        transition: all 300ms ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      >.cancel-btn{
+        background-color: #f56767;
+        padding: .4em;
+        border: none;
+        border-radius: 1px;
+        cursor: pointer;
+        transition: all 300ms ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+      
+    }
+    
+  }
+}
+
+
+
+
+
+
+
+
+
+/* ADMIN-LEFT INDIVIDUAL STUDENT REPORT PAGE END */
+
 /* ADMIN-LEFT ATTENDANCE PAGE START */
 .attendance-section {
 
