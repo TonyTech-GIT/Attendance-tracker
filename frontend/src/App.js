@@ -14,6 +14,7 @@ const App = () => {
   // to set and update data received from the authorization page...
 
   const [dataFromAuth, setDataFromAuth] = useState(null)
+  const [attendanceData, setAttendanceData] = useState(0)
 
 
   // const [validStudent, setValidStudent] = useState([])
@@ -31,6 +32,10 @@ const App = () => {
 
   // }
 
+  const handleAvgAttendance = (avgData) => {
+    setAttendanceData(avgData)
+  }
+
 
 
   return (
@@ -47,8 +52,8 @@ const App = () => {
 
           <Route path='/auth/admin' element={<AdminDashboard authDetails={dataFromAuth} />} />
           <Route path='/auth/admin/report' element={<Report />} />
-          <Route path={`/auth/admin/report/:studentId`} element={<IndividualStu />} />
-          <Route path={`/auth/admin/attendance`} element={<Attendance />} />
+          <Route path={`/auth/admin/report/:studentId`} element={<IndividualStu attendanceReceived={attendanceData} />} />
+          <Route path={`/auth/admin/attendance`} element={<Attendance avgAttendance={handleAvgAttendance} />} />
 
 
           <Route path='/auth/student' element={<StudentDashboard authDetails={dataFromAuth} />} />

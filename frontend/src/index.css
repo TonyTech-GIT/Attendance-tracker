@@ -262,12 +262,13 @@ body{
   right: 0;
   height: 100vh;
   width: 100vw;
+  z-index: 999;
 
   >.content{
     background-color: #eee;
     height: 500px;
     width: 600px;
-    margin: 10vh auto;
+    margin: 19vh auto;
     border-radius: 2px;
     position: relative;
 
@@ -492,6 +493,10 @@ body{
 
       >input[type = text]{
         margin-left: 1.8em;
+      }
+
+      >.atn-value{
+        margin-left: 1em;
       }
 
     }

@@ -1,16 +1,24 @@
 import { useState, useEffect } from "react"
 import axios from 'axios'
+import { useNavigate } from "react-router"
 
-const Attendance = () => {
+const Attendance = ({ avgAttendance }) => {
 
     const [studentLists, setStudentLists] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
     const [selectedStudentIndex, setSelectedStudentIndex] = useState(null)
 
+    const [averageAttendance, setAverageAttendance] = useState(0)
+
+    console.log(averageAttendance);
+
+    const navigate = useNavigate()
+
 
     // Load data from local storage on component mount...
     useEffect(() => {
+
         const storedData = localStorage.getItem('attendanceData')
 
 
@@ -18,7 +26,7 @@ const Attendance = () => {
 
             setStudentLists(JSON.parse(storedData).students)
 
-
+            // setSelectedStudentIndex(selectedStudentIndex)
 
             const storedTimestamp = JSON.parse(storedData).timestamp
             const currentTime = new Date().getTime()
@@ -39,6 +47,10 @@ const Attendance = () => {
                 setStudentLists([])
             }
 
+            // Initialize averageAttendance with the stored value
+            const storedAverageAttendance = JSON.parse(storedData).averageAttendance;
+            setAverageAttendance(storedAverageAttendance);
+
         }
 
     }, [])
@@ -56,10 +68,12 @@ const Attendance = () => {
                     ...studentWithAttendance,
                     presentCount: 0,
                     absentCount: 0,
-                    attendanceRate: 0 // Start with 0
+                    attendanceRate: 0, // Start with 0
+                    averageAttendanceValue: 0 // Initialize the Avg value
                 }))
 
                 setStudentLists(studentsWithAttendance)
+
 
                 const dataToStore = {
                     students: studentsWithAttendance,
@@ -82,6 +96,8 @@ const Attendance = () => {
     }
 
     const handleButtonPresent = (studentIndex) => {
+        setSelectedStudentIndex(studentIndex)
+
         setStudentLists(prevLists => {
             const updatedLists = [...prevLists];
             updatedLists[studentIndex].presentCount++;
@@ -91,23 +107,84 @@ const Attendance = () => {
                 5
             );
 
+            const newAverageAttendance = calcAveragePercentage(
+                updatedLists[studentIndex].presentCount,
+                updatedLists[studentIndex].absentCount,
+                5
+            ).toFixed(2)
+
+
+
+            // Store updated studentLists in local storage
+            const avgToStore = {
+                students: updatedLists,
+                timestamp: new Date().getTime()
+            };
+            localStorage.setItem('attendanceData', JSON.stringify(avgToStore));
+
+
+
+            // navigate(`/auth/admin/report/${studentLists.map((studentList) => studentList.id)}`)
+
+            setAverageAttendance(newAverageAttendance)
+
+            avgAttendance(newAverageAttendance)
+
 
             return updatedLists
         })
 
+
+
+
+
     }
 
     const handleButtonAbsent = (studentIndex) => {
+        setSelectedStudentIndex(studentIndex)
+
         setStudentLists(prevLists => {
             const updatedLists = [...prevLists]
             updatedLists[studentIndex].absentCount++;
+
             updatedLists[studentIndex].attendanceRate = calcAveragePercentage(
-                updatedLists[studentIndex].presentCount++,
-                updatedLists[studentIndex].absentCount++,
+                updatedLists[studentIndex].presentCount,
+                updatedLists[studentIndex].absentCount,
                 5 // Assuming 5 days
 
             );
 
+
+            const newAverageAttendance = calcAveragePercentage(
+                updatedLists[studentIndex].presentCount,
+                updatedLists[studentIndex].absentCount,
+                5
+            ).toFixed(2)
+
+            // // Check if average attendance is not already stored
+            // if (!updatedLists[studentIndex].averageAttendanceValue) {
+            //     const newAverageAttendance = calcAveragePercentage(
+            //         updatedLists[studentIndex].presentCount,
+            //         updatedLists[studentIndex].absentCount,
+            //         5
+            //     ).toFixed(2);
+
+            //     updatedLists[studentIndex].averageAttendanceValue = newAverageAttendance;
+
+
+            // Store updated studentLists in local storage
+            const avgToStore = {
+                students: updatedLists,
+                timestamp: new Date().getTime()
+            };
+            localStorage.setItem('attendanceData', JSON.stringify(avgToStore));
+
+
+            // navigate(`/auth/admin/report/${studentLists.map((studentList) => studentList._id)}`)
+
+            setAverageAttendance(newAverageAttendance)
+
+            avgAttendance(newAverageAttendance)
 
             return updatedLists
         })
@@ -133,6 +210,18 @@ const Attendance = () => {
 
         return (presentCount / totalClasses) * 100;
     }
+
+    // const storeAvgValue = (studentId, avgAttendance) => {
+
+
+    //     const storedAvgData = JSON.parse(localStorage.getItem('storedAtnValue')) || {};
+    //     storedAvgData[studentId] = avgAttendance;
+    //     localStorage.setItem('storedAtnValue', JSON.stringify(storeAvgValue));
+
+
+    //     // localStorage.setItem('storedAvgValue', averageAttendance)
+
+    // }
 
 
     return (
@@ -163,7 +252,7 @@ const Attendance = () => {
                             </thead>
 
                             <tbody className='table-body'>
-                                {studentLists.map((studentList, index) => (
+                                {studentLists.map((studentList, index, studentIndex) => (
 
                                     <tr key={index}>
                                         {/* <td>{studentList.id}</td> */}
@@ -177,16 +266,30 @@ const Attendance = () => {
                                             <button onClick={() => handleResetButton(index)}>Reset</button>
                                         </td>
                                         <td><b>Present:</b> <span>{studentList.presentCount}</span> <b>Absent:</b> <span>{studentList.absentCount}</span> </td>
-                                        <td>{selectedStudentIndex === index && <>
-                                            {calcAveragePercentage(
-                                                studentList.presentCount,
-                                                studentList.absentCount,
-                                                5 // Assuming 5 days
-                                            ).toFixed(2)}
-                                            % </>}
+                                        <td>
+
+                                            {selectedStudentIndex === index && <>
+                                                {calcAveragePercentage(
+                                                    studentList.presentCount,
+                                                    studentList.absentCount,
+                                                    5 // Assuming 5 days
+                                                ).toFixed(2)}
+
+                                                % </>
+                                            }
 
                                         </td>
-                                        <button className="atn-btn" onClick={() => setSelectedStudentIndex(index)}>Get Rate</button>
+                                        <button className="atn-btn" onClick={() => {
+                                            navigate(`/auth/admin/report/${studentList.firstName}`)
+                                            setSelectedStudentIndex(index);
+
+                                        }}>Get Rate</button>
+
+
+
+                                        {/* storeAvgValue(studentList.id, studentList.averageAttendance); */}
+
+
 
 
 

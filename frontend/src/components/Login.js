@@ -39,6 +39,8 @@ const Login = ({ dataReceived }) => {
             .then((response) => {
                 const userData = response.data;
 
+                localStorage.setItem('userData', JSON.stringify(userData))
+
                 dataReceived(userData)
 
                 const userRole = response.data.role

@@ -67,6 +67,8 @@ const Auth = ({ dataReceived }) => {
 
                     dataReceived(responseData)
 
+                    localStorage.setItem('userData', JSON.stringify(responseData))
+
 
                     // redirect based on user roles...
                     const userRole = response.data.role

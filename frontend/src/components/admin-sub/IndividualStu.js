@@ -1,14 +1,28 @@
-import React from 'react'
-import { useLocation } from 'react-router'
+import React, { useEffect } from 'react'
+import { PDFDownloadLink, Document, Page, Text } from '@react-pdf/renderer'
 
-const IndividualStu = () => {
-    const location = useLocation()
-    const studentData = location.state?.studentData || null
+const IndividualStu = ({ attendanceReceived }) => {
 
-    const attendanceRate = studentData ? studentData.attendanceRate.toFixed(2) + '%' : 'N/A'
+    // const attendanceRate = studentData ? studentData.attendanceRate.toFixed(2) + '%' : 'N/A'
 
-    console.log(attendanceRate)
-    console.log(studentData);
+    const AttendanceReportPDF = ({ attendanceReceived }) => {
+        return (
+            <Document style={{ margin: '0 auto' }}>
+                <Page size="A4">
+                    <Text>Attendance Report</Text>
+                    <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia laudantium eum nisi itaque debitis voluptatibus asperiores explicabo ad maiores repellendus.</Text>
+                    <Text>Attendance: {attendanceReceived}</Text>
+                </Page>
+            </Document>
+        );
+    };
+
+    useEffect(() => {
+        console.log(attendanceReceived)
+    }, [attendanceReceived])
+
+    // console.log(attendanceRate)
+    // console.log(studentData);
     return (
         <div>
             <h1>Individual Student Report</h1>
@@ -46,15 +60,28 @@ const IndividualStu = () => {
                             Attendance Rate
 
                         </label>
-                        <label>
-                            {attendanceRate}
+                        <label className='atn-value'>
+                            {attendanceReceived}
                         </label>
                         {/* <input type="text" value={studentData?.firstName || ''} /> */}
                     </div>
 
 
                     <div className="btn-container">
-                        <button className='download-btn'>Download</button>
+                        <button className='download-btn'>
+
+                            <PDFDownloadLink
+                                document={<AttendanceReportPDF attendanceReceived={attendanceReceived} />}
+                                fileName="attendance_report.pdf"
+                                style={{ textDecoration: 'none', color: '#000' }}
+                            >
+                                {({ blob, url, loading, error }) =>
+                                    loading ? 'Loading document...' : 'Download PDF'
+                                }
+                            </PDFDownloadLink>
+                        </button>
+
+
                         <button className='cancel-btn'>Cancel</button>
                     </div>
                 </form>
