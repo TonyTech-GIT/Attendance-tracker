@@ -1,58 +1,103 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PDFDownloadLink, Document, Page, Text } from '@react-pdf/renderer'
+import axios from 'axios';
+import { useNavigate } from 'react-router';
 
-const IndividualStu = ({ attendanceReceived }) => {
+const IndividualStu = ({ attendanceReceived, presentReceived, absentReceived, testValidStu }) => {
 
-    // const attendanceRate = studentData ? studentData.attendanceRate.toFixed(2) + '%' : 'N/A'
+    const navigate = useNavigate()
 
-    const AttendanceReportPDF = ({ attendanceReceived }) => {
+    const [detailStu, setDetailStu] = useState()
+
+
+    const firstName = testValidStu.firstName
+
+    const regNo = testValidStu.regNo
+
+    console.log('stu firstName', firstName);
+    console.log('stu regNo', regNo);
+
+
+
+    const AttendanceReportPDF = ({ attendanceReceived, firstName, regNo }) => {
         return (
-            <Document style={{ margin: '0 auto' }}>
-                <Page size="A4">
-                    <Text>Attendance Report</Text>
-                    <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia laudantium eum nisi itaque debitis voluptatibus asperiores explicabo ad maiores repellendus.</Text>
-                    <Text>Attendance: {attendanceReceived}</Text>
+            <Document >
+                <Page size="A4" style={{ padding: '0 16px' }}>
+                    <Text style={{ textAlign: 'center', padding: '16px 0 16px 0', fontSize: '20px', fontWeight: 'bold' }}>Attendance Report</Text>
+                    <Text style={{ padding: '16px 12.8px', fontSize: '16px' }}>This is an attendance report of the student,<Text style={{ fontWeight: 'bold' }}>{firstName}</Text>, with the registration number,<Text style={{ fontWeight: 'bold' }}>{regNo}</Text> based on the attendance to class calculated on the average of five working days from Monday to Friday. The The students rate of attendance is as stated below:</Text>
+                    <Text style={{ fontWeight: 'bold' }}>Classes Present: {presentReceived}</Text>
+                    <Text style={{ margin: '16px 0 16px 0', fontWeight: 'bold' }}>Classes Absent: {absentReceived}</Text>
+                    <Text style={{ fontWeight: 'bold' }}>Attendance Report: {attendanceReceived}%</Text>
                 </Page>
             </Document>
         );
     };
 
     useEffect(() => {
-        console.log(attendanceReceived)
-    }, [attendanceReceived])
 
-    // console.log(attendanceRate)
-    // console.log(studentData);
+        axios
+            .get('http://localhost:5000/auth/studentReg')
+            .then((res) => {
+
+
+                const details = res.data.filter(student => student.courses === "CSC 442")
+                console.log(details)
+
+                setDetailStu(details)
+
+                console.log('hbvyvhvivib', detailStu)
+
+
+            })
+            .catch((err) => {
+                console.log('Student detail request failed', err);
+                // alert('Student detail request failed', err);
+            })
+
+        console.log(attendanceReceived)
+        console.log('present value', presentReceived);
+        console.log('absent value', absentReceived);
+
+
+    }, [attendanceReceived, presentReceived, absentReceived, detailStu])
+
+
     return (
         <div>
             <h1>Individual Student Report</h1>
 
             <main className="student-report">
                 <h2 className='header'>Student Report</h2>
-                <p className='report-text'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia laudantium eum nisi itaque debitis voluptatibus asperiores explicabo ad maiores repellendus.</p>
+                <p className='report-text'>This is an attendance report of the student, <b>{firstName}</b> with the registration number,<b>{regNo}</b>, based on the attendance to class calculated on the average of five working days from Monday to Friday. The The students rate of attendance is as stated below:</p>
+
 
                 <form className='report-form'>
                     <div className="class-present-container flex">
-                        <label>
+                        <label className='present-label'>
                             Classes present
 
                         </label>
                         <label>
-                            {/* {studentData && `${studentData}`} */}
+                            <strong>
+                                {presentReceived}
+
+                            </strong>
                         </label>
 
-                        {/* <input type="text" value={studentData?.firstName || ''} /> */}
                     </div>
 
                     <div className="class-absent-container flex">
-                        <label >
+                        <label className='absent-label'>
                             Classes absent
 
                         </label>
                         <label>
-                            {/* {studentData ? `${studentData}` : 'No data'} */}
+                            <strong>
+                                {absentReceived}
+
+                            </strong>
                         </label>
-                        {/* <input type="text" value={studentData?.firstName || ''} /> */}
+
                     </div>
 
                     <div className="attendance-rate-container flex">
@@ -61,9 +106,12 @@ const IndividualStu = ({ attendanceReceived }) => {
 
                         </label>
                         <label className='atn-value'>
-                            {attendanceReceived}
+                            <strong>
+                                {attendanceReceived}%
+
+                            </strong>
                         </label>
-                        {/* <input type="text" value={studentData?.firstName || ''} /> */}
+
                     </div>
 
 
@@ -71,7 +119,9 @@ const IndividualStu = ({ attendanceReceived }) => {
                         <button className='download-btn'>
 
                             <PDFDownloadLink
-                                document={<AttendanceReportPDF attendanceReceived={attendanceReceived} />}
+                                document={<AttendanceReportPDF attendanceReceived={attendanceReceived}
+                                    firstName={firstName}
+                                    regNo={regNo} />}
                                 fileName="attendance_report.pdf"
                                 style={{ textDecoration: 'none', color: '#000' }}
                             >
@@ -82,7 +132,9 @@ const IndividualStu = ({ attendanceReceived }) => {
                         </button>
 
 
-                        <button className='cancel-btn'>Cancel</button>
+                        <button className='cancel-btn' onClick={() => {
+                            navigate('/auth/admin/attendance')
+                        }}>Cancel</button>
                     </div>
                 </form>
             </main>

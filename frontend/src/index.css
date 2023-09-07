@@ -465,6 +465,7 @@ body{
   }
 /* ADMIN-LEFT REPORT PAGE END... */
 
+
 /* ADMIN-LEFT INDIVIDUAL STUDENT REPORT PAGE START */
 .student-report{
   height: 500px;
@@ -484,9 +485,29 @@ body{
 
   >.report-form{
 
+    >.class-present-container{
+      >.present-label{
+        margin-right: 1em;
+
+        font-weight: bold;
+      }
+    }
+
 
     >.class-absent-container{
       margin-block: 1em;
+
+      >.absent-label{
+        margin-right: 1.3em;
+
+        font-weight: bold;
+      }
+    }
+
+    >.attendance-rate-container{
+      >label{
+        font-weight: bold;
+      }
     }
 
     .class-present-container, .class-absent-container, .attendance-rate-container{
@@ -496,7 +517,7 @@ body{
       }
 
       >.atn-value{
-        margin-left: 1em;
+        margin-left: .5em;
       }
 
     }

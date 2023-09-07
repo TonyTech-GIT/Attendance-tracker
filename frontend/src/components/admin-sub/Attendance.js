@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 import { useNavigate } from "react-router"
 
-const Attendance = ({ avgAttendance }) => {
+const Attendance = ({ avgAttendance, presentCount, absentCount, testAtn }) => {
 
     const [studentLists, setStudentLists] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -11,16 +11,16 @@ const Attendance = ({ avgAttendance }) => {
 
     const [averageAttendance, setAverageAttendance] = useState(0)
 
-    console.log(averageAttendance);
+    console.log('average attendance', averageAttendance);
 
     const navigate = useNavigate()
+
 
 
     // Load data from local storage on component mount...
     useEffect(() => {
 
         const storedData = localStorage.getItem('attendanceData')
-
 
         if (storedData) {
 
@@ -64,6 +64,8 @@ const Attendance = ({ avgAttendance }) => {
             .then((res) => {
                 const attendanceData = res.data.filter(student => student.courses === "CSC 442")
 
+
+
                 const studentsWithAttendance = attendanceData.map(studentWithAttendance => ({
                     ...studentWithAttendance,
                     presentCount: 0,
@@ -73,6 +75,10 @@ const Attendance = ({ avgAttendance }) => {
                 }))
 
                 setStudentLists(studentsWithAttendance)
+
+                // testAtn(studentsWithAttendance)
+
+
 
 
                 const dataToStore = {
@@ -124,18 +130,14 @@ const Attendance = ({ avgAttendance }) => {
 
 
 
-            // navigate(`/auth/admin/report/${studentLists.map((studentList) => studentList.id)}`)
-
             setAverageAttendance(newAverageAttendance)
 
             avgAttendance(newAverageAttendance)
 
+            presentCount(updatedLists[studentIndex].presentCount)
 
             return updatedLists
         })
-
-
-
 
 
     }
@@ -161,15 +163,6 @@ const Attendance = ({ avgAttendance }) => {
                 5
             ).toFixed(2)
 
-            // // Check if average attendance is not already stored
-            // if (!updatedLists[studentIndex].averageAttendanceValue) {
-            //     const newAverageAttendance = calcAveragePercentage(
-            //         updatedLists[studentIndex].presentCount,
-            //         updatedLists[studentIndex].absentCount,
-            //         5
-            //     ).toFixed(2);
-
-            //     updatedLists[studentIndex].averageAttendanceValue = newAverageAttendance;
 
 
             // Store updated studentLists in local storage
@@ -180,11 +173,12 @@ const Attendance = ({ avgAttendance }) => {
             localStorage.setItem('attendanceData', JSON.stringify(avgToStore));
 
 
-            // navigate(`/auth/admin/report/${studentLists.map((studentList) => studentList._id)}`)
 
             setAverageAttendance(newAverageAttendance)
 
             avgAttendance(newAverageAttendance)
+
+            absentCount(updatedLists[studentIndex].absentCount)
 
             return updatedLists
         })
@@ -211,17 +205,6 @@ const Attendance = ({ avgAttendance }) => {
         return (presentCount / totalClasses) * 100;
     }
 
-    // const storeAvgValue = (studentId, avgAttendance) => {
-
-
-    //     const storedAvgData = JSON.parse(localStorage.getItem('storedAtnValue')) || {};
-    //     storedAvgData[studentId] = avgAttendance;
-    //     localStorage.setItem('storedAtnValue', JSON.stringify(storeAvgValue));
-
-
-    //     // localStorage.setItem('storedAvgValue', averageAttendance)
-
-    // }
 
 
     return (
@@ -279,32 +262,20 @@ const Attendance = ({ avgAttendance }) => {
                                             }
 
                                         </td>
-                                        <button className="atn-btn" onClick={() => {
-                                            navigate(`/auth/admin/report/${studentList.firstName}`)
-                                            setSelectedStudentIndex(index);
 
-                                        }}>Get Rate</button>
-
+                                        <td>
+                                            <button className="atn-btn" onClick={() => {
+                                                navigate(`/auth/admin/report/${studentList.firstName}`)
+                                                setSelectedStudentIndex(index);
+                                                testAtn(studentList)
+                                            }}>
+                                                Get Rate
+                                            </button>
+                                        </td>
 
 
                                         {/* storeAvgValue(studentList.id, studentList.averageAttendance); */}
 
-
-
-
-
-                                        {/* <>{selectedStudentIndex === index ? (
-                                                <td>
-                                                    {calcAveragePercentage(
-                                                        studentList.presentCount,
-                                                        studentList.absentCount,
-                                                        5 // Assuming 5 days
-                                                    ).toFixed(2)}
-                                                    %
-                                                </td>
-                                            ) : (
-                                                <button className="atn-btn" onClick={() => setSelectedStudentIndex(index)}>Get Rate</button>
-                                            )}</> */}
 
                                     </tr>
                                 ))}

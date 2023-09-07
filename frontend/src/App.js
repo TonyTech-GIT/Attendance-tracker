@@ -16,8 +16,12 @@ const App = () => {
   const [dataFromAuth, setDataFromAuth] = useState(null)
   const [attendanceData, setAttendanceData] = useState(0)
 
+  const [presentCountReceived, setPresentCountReceived] = useState(0)
+  const [absentCountReceived, setAbsentCountReceived] = useState(0)
 
-  // const [validStudent, setValidStudent] = useState([])
+
+
+  const [validStudent, setValidStudent] = useState([])
 
   // function passed as a prop to auth component and handles the data gotten from it...
   const handleDataForStudent = (data) => {
@@ -25,16 +29,38 @@ const App = () => {
   }
 
   // function to handle student data sent to admin dashboard...
-  // const handleValidStudent = (data) => {
-  //   setValidStudent(data)
+  const handleValidStudent = (data) => {
+    setValidStudent(data)
 
-  //   // console.log('from app component', validStudent)
+    console.log('from app component', validStudent)
 
-  // }
+    // const firstName = data.map((studentFirstname) => studentFirstname.firstName)
+
+    // const regNo = data.map((studentRegno) => studentRegno.regNo)
+
+    // console.log('stu firstName', firstName);
+    // console.log('stu regNo', regNo);
+
+  }
+
+
 
   const handleAvgAttendance = (avgData) => {
     setAttendanceData(avgData)
   }
+
+  const handlePresentCount = (presentValue) => {
+    setPresentCountReceived(presentValue)
+
+    console.log('present value', presentValue);
+  }
+  const handleAbsentCount = (absentValue) => {
+    setAbsentCountReceived(absentValue)
+
+    console.log('absent value', absentValue);
+  }
+
+
 
 
 
@@ -52,8 +78,19 @@ const App = () => {
 
           <Route path='/auth/admin' element={<AdminDashboard authDetails={dataFromAuth} />} />
           <Route path='/auth/admin/report' element={<Report />} />
-          <Route path={`/auth/admin/report/:studentId`} element={<IndividualStu attendanceReceived={attendanceData} />} />
-          <Route path={`/auth/admin/attendance`} element={<Attendance avgAttendance={handleAvgAttendance} />} />
+          <Route path={`/auth/admin/report/:studentId`} element={
+            <IndividualStu
+              attendanceReceived={attendanceData}
+              presentReceived={presentCountReceived}
+              absentReceived={absentCountReceived}
+              testValidStu={validStudent}
+            />} />
+          <Route path={`/auth/admin/attendance`} element={
+            <Attendance
+              avgAttendance={handleAvgAttendance}
+              presentCount={handlePresentCount}
+              absentCount={handleAbsentCount}
+              testAtn={handleValidStudent} />} />
 
 
           <Route path='/auth/student' element={<StudentDashboard authDetails={dataFromAuth} />} />
