@@ -1,0 +1,199 @@
+:root{
+  --first-clr: #e63946;
+  --second-clr: #f1faee;
+  --third-clr: #a8dadc;
+  --fourth-clr: #457b9d;
+  --fifth-clr: #1d3557;
+}
+
+ @import-normalize;
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;700&family=Lato:wght@300&family=Merriweather&family=Montserrat:wght@100;400;900&family=Oswald&family=Overpass:wght@300;400;700&family=Poppins:wght@100;200;300;400&family=Public+Sans:wght@300;400;700&family=Roboto:wght@300;400;700&family=Sacramento&family=Sigmar+One&family=Ubuntu:wght@300&display=swap');
+
+@import url('./sections/admin.css');
+@import url('./sections/student.css');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: var(--second-clr);
+  font-family: 'Montserrat', sans-serif;
+
+  overflow-x: hidden;
+}
+
+/* welcome.... */
+.welcome {
+  background-color: var(--fourth-clr);
+  margin: 15vh auto;
+  height: 300px;
+  min-width: 800px;
+  width: 800px;
+  border-radius: 3px;
+  /* position: relative; */
+
+}
+
+.welcome h1 {
+  text-align: center;
+  margin-block-end: 2em;
+  padding-block-start: 1em;
+  font-family: 'poppins', sans-serif;
+  font-weight: 400;
+}
+
+.welcome .welcome-btn {
+  /* margin: 0em 40%; */
+  position: relative;
+  left: 23em;
+  padding: .8em 3em;
+  font-family: 'poppins', sans-serif;
+  font-weight: 600;
+  font-size: .85em;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 200ms ease-in;
+}
+.welcome .welcome-btn:hover {
+  transform: scale(1.1);
+}
+
+
+/* Authorization Page... */
+.auth-form{
+  background-color: var(--fourth-clr);
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 2em 1em;
+  height: 400px;
+  width: 450px;
+  border-radius: 5px;
+}
+
+.label input{
+  margin-inline-start: 1em;
+  padding: .25em .14em;
+  border: none;
+  border-radius: 1.5px;
+}
+.label input:focus{
+  outline: none;
+}
+
+.label input[type = 'text'], [type = 'email'], [type = 'password'] {
+  width: 50%;
+}
+
+.label input[type = 'email'] {
+  margin-inline-start: 3.75em;
+}
+.label input[type = 'password'] {
+  margin-inline-start: 1.35em;
+}
+
+.label:not(:last-child){
+  margin-block-end: 2em;
+}
+
+.passwordLabel input[type = 'text'] {
+  margin-inline-start: 1.35em;
+}
+
+.roles{
+  margin-inline-start: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.roles label:not(:last-child){
+  display: inline-flex;
+  margin-inline-end: 1em;
+}
+.roles label input {
+  margin: 5px;
+  cursor: pointer;
+}
+
+
+/* PASSWORD-TOGGLE-ICON... */
+.password-wrapper{
+  position: relative;
+  
+}
+
+.password-toggle-btn{
+  position: absolute;
+  right: 27%;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  border: none;
+  cursor: pointer;
+}
+
+
+
+.cta .signUp-btn{
+  padding: .5em 1em;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 200ms ease-in;
+}
+.cta .signUp-btn:hover {
+  transform: scale(1.1);
+}
+.cta p{
+  margin-block-start: 1em;
+  font-size: small;
+}
+
+
+/* LOGIN PAGE SECTION... */
+.login-form{
+  background-color: var(--fourth-clr);
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 3em 1em;
+  height: 400px;
+  width: 450px;
+  border-radius: 5px;
+}
+
+
+/* RESPONSIVENESS... */
+
+/* MOBILE... */
+@media(max-width: 639px) {
+
+  /* WELCOME PAGE... */
+  .welcome{
+    min-width: 450px;
+    width: 300px;
+  }
+  .welcome .welcome-btn{
+    left: 12.3em;
+    padding: .8em 2em;
+  /* margin: 0 35%; */
+
+  }
+
+  /* AUTHORIZATION PAGE... */
+  .auth-form, .login-form{
+    margin-block-start: 2em;
+  }
+  /* h1{
+    margin-block: .5em;
+    text-align: center;
+  } */
+}
+
+
+
+
+

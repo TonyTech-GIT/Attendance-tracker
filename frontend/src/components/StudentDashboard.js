@@ -4,17 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose, faExclamationCircle, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import axios from "axios"
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 // import Report from "./admin-sub/Report"
 
 
 
 const StudentDashboard = ({ authDetails }) => {
-
-
-
     const [showModal, setShowModal] = useState(false)
     const [modalMe, setModalMe] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+
+    const [date, setDate] = useState(new Date())
 
 
     const [firstName, setFirstName] = useState('')
@@ -195,7 +196,6 @@ const StudentDashboard = ({ authDetails }) => {
                         <div className="profile ">
                             {errorMessage && (
                                 <>
-
                                     <div className="error-msg"><FontAwesomeIcon className="error-icon" icon={faExclamationCircle} />{errorMessage}</div>
                                 </>
 
@@ -312,13 +312,12 @@ const StudentDashboard = ({ authDetails }) => {
 
                                     </label>
 
-                                    <label className="label-facialRecog">
+                                    {/* <label className="label-facialRecog">
                                         Facial Recognition:
                                         <button className="facial-recog-btn ">Facial Capture</button>
-                                        {/* <input className="label-secondContact-text" type="number" placeholder="Enter your Second Contact" /> */}
 
 
-                                    </label>
+                                    </label> */}
                                 </div>
 
 
@@ -330,13 +329,11 @@ const StudentDashboard = ({ authDetails }) => {
 
                                 <button onClick={handleMeConfirm} className="confirm-btn">Confirm</button>
 
+                                <button onClick={handleModalCancel} className="update-btn">Update</button>
+
                             </div>
 
-
-
                         </div>
-
-
 
                     </main>)}
 
@@ -357,7 +354,7 @@ const StudentDashboard = ({ authDetails }) => {
             <section className="admin-body-section grid">
 
                 <aside className="admin-aside-left">
-                    <h1>Left aside</h1>
+                    {/* <h1>Left aside</h1> */}
                     <div className="aside-lists">
                         <ul>
 
@@ -369,7 +366,7 @@ const StudentDashboard = ({ authDetails }) => {
 
 
                             {/* <li>Attendance</li> */}
-                            <li>Courses</li>
+                            {/* <li>Courses</li> */}
                             {/* <li>Student Profile</li> */}
 
                             {showModal && (
@@ -406,15 +403,11 @@ const StudentDashboard = ({ authDetails }) => {
                                                     <p>{gender}</p>
                                                 </label>
 
-                                                {/* <label className="content-role label">
-                                                    Role:
-                                                    <p>sdfgsdgfd</p>
-                                                </label> */}
-
                                                 <label className="content-course label">
                                                     Course:
                                                     <p>{courses}</p>
                                                 </label>
+
                                                 <label className="content-phoneNo label">
                                                     Contact:
                                                     <p>{contact}</p>
@@ -444,10 +437,11 @@ const StudentDashboard = ({ authDetails }) => {
                                                     second-contact:
                                                     <p>{secondContact}</p>
                                                 </label>
-                                                <label className="content-phoneNo label">
+
+                                                {/* <label className="content-phoneNo label">
                                                     Facial Recognition:
                                                     <p>adfSfgSDg</p>
-                                                </label>
+                                                </label> */}
                                             </div>
 
                                         </div>
@@ -461,23 +455,29 @@ const StudentDashboard = ({ authDetails }) => {
                 </aside>
 
                 <main className="admin-main">
-                    <h1>Student-main</h1>
+                    {/* <h1>Student-main</h1> */}
                     {/* <div className="analytics flex">
                         <div className="analy-1"></div>
                         <div className="analy-2"></div>
                     </div> */}
                     <div className="student-overall flex">
+                        <div className="student-overall_img1">
+                            <img src="../components/assets/Students profile.png" alt="student-profile" />
+                        </div>
+                        <div className="student-overall_img2">
+                            <img src="../components/assets/attendance-record.png" alt="attendance-record" />
+                        </div>
 
                     </div>
                     <footer className="main-footer">
-                        <p>This is a nice project by me &copy; 2023</p>
+                        <p>Attendance-Tracker project &copy; 2023</p>
                     </footer>
                 </main>
 
                 <aside className="admin-aside-right">
-                    <h1>Aside-right</h1>
+                    {/* <h1>Aside-right</h1> */}
                     <div className="aside-sched">
-
+                        <Calendar onChange={setDate} value={date} />
                     </div>
                 </aside>
 

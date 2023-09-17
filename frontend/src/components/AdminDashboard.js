@@ -1,11 +1,12 @@
 import DashBtn from "./DashBtn"
 import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faClose, faUser } from "@fortawesome/free-solid-svg-icons"
+import { faClose, faUser, faExclamationCircle } from "@fortawesome/free-solid-svg-icons"
 import { useState, useEffect } from "react"
 import Chart from 'react-apexcharts'
-// import TextField from '@material-ui/core/TextField'
-// import AutoComplete from '@material-ui/lab/Autocomplete'
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import axios from 'axios'
 
 // import AdminDataContext from "./AdminDataContext"
 
@@ -13,11 +14,18 @@ import Chart from 'react-apexcharts'
 const AdminDashboard = ({ authDetails }) => {
     const [showModal, setShowModal] = useState(false)
     const [modalMe, setModalMe] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+    const [menuButton, setMenuButton] = useState(false)
+
+    const [date, setDate] = useState(new Date())
+
+
+    const [newAdmin, setNewAdmin] = useState(null)
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [gender, setGender] = useState('')
-    // const [courses, setCourses] = useState(false)
+    const [regNo, setRegNo] = useState('')
     const [contact, setContact] = useState('')
     const [course1, setCourse1] = useState(false)
     const [course2, setCourse2] = useState(false)
@@ -34,7 +42,7 @@ const AdminDashboard = ({ authDetails }) => {
                 id: "basic-bar"
             },
             xaxis: {
-                categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+                categories: [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
             }
         },
         series: [
@@ -42,10 +50,10 @@ const AdminDashboard = ({ authDetails }) => {
                 name: "series-1",
                 data: [30, 40, 45, 50, 49, 60, 70, 91]
             },
-            {
-                name: "series-2",
-                data: [3, 60, 35, 80, 59, 60, 20, 95]
-            }
+            // {
+            //     name: "series-2",
+            //     data: [3, 60, 35, 80, 59, 60, 20, 95]
+            // }
         ]
     }
     )
@@ -68,6 +76,9 @@ const AdminDashboard = ({ authDetails }) => {
     const handleAdminProfile = () => {
         return setShowModal(!showModal)
     }
+    const handleAdminIcon = () => {
+        return setModalMe(!modalMe)
+    }
 
     if (showModal || modalMe) {
         document.body.classList.add('active-modal')
@@ -81,12 +92,100 @@ const AdminDashboard = ({ authDetails }) => {
 
     const handleMeCancel = () => {
         setModalMe(!modalMe)
-        // console.log(courses)
+
+        setErrorMessage('')
     }
 
+
+
     const handleMeConfirm = () => {
-        return setModalMe(!modalMe)
+        // return setModalMe(!modalMe)
+
+        const selectedCourses = [];
+        if (course1) {
+            selectedCourses.push('CSC 442');
+        }
+        if (course2) {
+            selectedCourses.push('CSC 414');
+        }
+        if (course3) {
+            selectedCourses.push('CSC 422');
+        }
+
+        const adminData = {
+
+            firstName,
+            lastName,
+            gender,
+            courses: selectedCourses,
+            contact,
+            regNo
+
+        };
+
+        if (!firstName || !lastName || !gender || !contact || !regNo) {
+            alert('Please fill all fields')
+            return setErrorMessage('Please fill all fields')
+        } else {
+            const validRegNo = /^LECT\/\d{2}\/\d{1,6}$/
+            if (!regNo.match(validRegNo)) {
+                alert('invalid reg number')
+                return setErrorMessage('Invalid Registration number format!')
+            }
+        }
+
+        // Check if at least one course checkbox is selected
+        if (!course1 && !course2 && !course3) {
+            alert('Please select at least one course');
+            return setErrorMessage('Please select at least one course');
+        }
+
+
+        // axios POST request for valid admin...
+
+        axios
+            .post('http://localhost:5000/auth/admin', adminData)
+            .then((response) => {
+
+                const testData = response.data
+
+                setNewAdmin(testData)
+
+                alert('Admin registered successfully!')
+                console.log(newAdmin);
+
+            })
+            .catch((err) => {
+                if (err.response &&
+                    err.response.status === 400 &&
+                    err.response.data.message === 'No admins found') {
+                    setErrorMessage('No admins found')
+                } else if (err.response &&
+                    err.response.status === 400 &&
+                    err.response.data.message === 'Admin already exists!') {
+                    setErrorMessage("Admin with this registration no' already exists!")
+                } else {
+                    console.log("Error fetching data", err)
+
+                }
+            })
+
     }
+
+    const handleMeUpdate = () => {
+
+
+        axios
+            .put(`http://localhost:5000/auth/admin/:id`)
+            .then((res) => {
+                const updatedAdmin = res.data
+
+                console.log('updated admin data', updatedAdmin);
+            })
+        // setModalMe(!modalMe)
+    }
+
+
 
     const navigateReportPage = () => {
         navigate('/auth/admin/report')
@@ -97,13 +196,29 @@ const AdminDashboard = ({ authDetails }) => {
     }
 
 
+    const toggleMenu = () => {
+
+        const menuOverlay = document.getElementById('mobileOverlay')
+        if (menuButton === true) {
+            menuOverlay.style.right = "-50%"
+
+        } else {
+            menuOverlay.style.right = "0"
+        }
+
+        setMenuButton(!menuButton)
+        console.log("hello");
+    };
+
+
+
+
 
     // const handleCourseSelection = (e) => {
     //     const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value)
 
     //     setCourses(selectedOptions)
     // }
-
 
 
     return (
@@ -123,7 +238,18 @@ const AdminDashboard = ({ authDetails }) => {
                     </Link>
 
                     {modalMe && (<main className="modal-me">
+
                         <div className="profile-modal">
+                            <FontAwesomeIcon className="modal-1_icon" onClick={handleAdminIcon} icon={faClose} />
+
+                            {errorMessage && (
+                                <>
+                                    <div className="error-msg"><FontAwesomeIcon className="error-icon" icon={faExclamationCircle} />{errorMessage}</div>
+                                </>
+
+
+                            )}
+
                             <label className="label-firstName">
                                 FirstName:
                                 <input className="label-firstName-text" type="text"
@@ -149,6 +275,14 @@ const AdminDashboard = ({ authDetails }) => {
                                     onChange={(e) => setGender(e.target.value)}
                                     placeholder="Enter your gender" />
 
+
+                            </label>
+                            <label className="label-gender">
+                                RegNo:
+                                <input className="label-gender-text" type="text"
+                                    value={regNo}
+                                    onChange={(e) => setRegNo(e.target.value)}
+                                    placeholder="Enter your RegNo" />
 
                             </label>
 
@@ -203,9 +337,9 @@ const AdminDashboard = ({ authDetails }) => {
 
                                 <button onClick={handleMeCancel} className="cancel-btn">Cancel</button>
 
-
-
                                 <button onClick={handleMeConfirm} className="confirm-btn">Confirm</button>
+
+                                <button onClick={handleMeUpdate} className="update-btn">Update</button>
 
                             </div>
                         </div>
@@ -220,26 +354,101 @@ const AdminDashboard = ({ authDetails }) => {
 
                         </Link>
                     </div>
-                </div>
 
-            </section>
+                    <div className={`menuBtn ${menuButton ? "change" : ""}`} onClick={toggleMenu}>
+                        <div className="bar-1"></div>
+                        <div className="bar-2"></div>
+                        <div className="bar-3"></div>
+                    </div>
 
-            {/* ADMIN HEADER SECTION ENDS... */}
-
-            {/* ADMIN BODY SECTION START... */}
-            <section className="admin-body-section grid">
-
-                <aside className="admin-aside-left">
-                    <h1>Left aside</h1>
-                    <div className="aside-lists">
+                    <div className="menuOverlay" id="mobileOverlay">
                         <ul>
 
                             <li onClick={handleAdminProfile}> Admin Profile</li>
 
                             <li onClick={navigateReportPage}>Report</li>
 
+                            <li onClick={navigateAttendancePage}>Attendance</li>
+                            {/* <li>Courses</li> */}
+                            <li>Student Profile</li>
+
+                            <Link to={'/'}>
+                                <button className="mobile-btn">Sign Out</button>
+
+                            </Link>
 
 
+
+                            {/* Static view of admin profile */}
+                            {showModal && (
+                                <div className="modal-1">
+                                    <main className="content">
+                                        <FontAwesomeIcon className="modal-1_icon" onClick={handleAdminProfile} icon={faClose} />
+                                        <div className="label-info">
+                                            <label className="content-name label">
+                                                UserName:
+                                                {/* <p>{authDetails.userName}</p> */}
+                                                <p>{userName}</p>
+                                            </label>
+                                            <label className="content-name label">
+                                                FirstName:
+                                                <p>{firstName}</p>
+                                            </label>
+                                            <label className="content-name label">
+                                                LastName:
+                                                <p>{lastName}</p>
+                                            </label>
+                                            <label className="content-email label">
+                                                Email:
+                                                {/* <p>{authDetails.email}</p> */}
+                                                <p>{email}</p>
+                                            </label>
+                                            <label className="content-gender label">
+                                                Gender:
+                                                <p>{gender}</p>
+                                            </label>
+
+
+
+                                            <label className="content-course label">
+                                                Course(s):
+                                                {course1 && <p>CSC 442</p>}
+                                                {course2 && <p>CSC 414</p>}
+                                                {course3 && <p>CSC 422</p>}
+
+
+                                            </label>
+                                            <label className="content-phoneNo label">
+                                                Contact:
+                                                <p>{contact}</p>
+                                            </label>
+                                        </div>
+
+                                    </main>
+
+                                </div>
+                            )}
+
+
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
+            {/* ADMIN HEADER SECTION ENDS... */}
+
+
+            {/* ADMIN BODY SECTION START... */}
+            <section className="admin-body-section grid">
+
+                <aside className="admin-aside-left">
+                    {/* <h1>Left aside</h1> */}
+                    <div className="aside-lists">
+                        <ul>
+
+                            <li onClick={handleAdminProfile}> Admin Profile</li>
+
+                            <li onClick={navigateReportPage}>Report</li>
 
                             <li onClick={navigateAttendancePage}>Attendance</li>
                             {/* <li>Courses</li> */}
@@ -299,7 +508,7 @@ const AdminDashboard = ({ authDetails }) => {
                 </aside>
 
                 <main className="admin-main">
-                    <h1>Admin-main</h1>
+                    {/* <h1>Admin-main</h1> */}
 
                     {/* ADMIN ANALYTICS FIRST-DIV CONTAINER... */}
                     <div className="analytics flex">
@@ -334,20 +543,18 @@ const AdminDashboard = ({ authDetails }) => {
                         />
                     </div>
                     <footer className="main-footer">
-                        <p>This is a nice project by me &copy; 2023</p>
+                        <p>Attendance-Tracker project &copy; 2023</p>
                     </footer>
                 </main>
 
                 <aside className="admin-aside-right">
-                    <h1>Aside-right</h1>
+                    {/* <h1>Aside-right</h1> */}
                     <div className="aside-sched">
-
+                        <Calendar onChange={setDate} value={date} />
                     </div>
                 </aside>
 
             </section>
-
-
 
 
             {/* ADMIN BODY SECTION END... */}

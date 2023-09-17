@@ -59,7 +59,9 @@ const IndividualStu = ({ attendanceReceived, presentReceived, absentReceived, te
         console.log('absent value', absentReceived);
 
 
-    }, [attendanceReceived, presentReceived, absentReceived, detailStu])
+    }, [])
+
+    // [attendanceReceived, presentReceived, absentReceived, detailStu],
 
 
     return (
@@ -67,7 +69,7 @@ const IndividualStu = ({ attendanceReceived, presentReceived, absentReceived, te
             <h1>Individual Student Report</h1>
 
             <main className="student-report">
-                <h2 className='header'>Student Report</h2>
+                <h2 className='header'>Attendance Report</h2>
                 <p className='report-text'>This is an attendance report of the student, <b>{firstName}</b> with the registration number,<b>{regNo}</b>, based on the attendance to class calculated on the average of five working days from Monday to Friday. The The students rate of attendance is as stated below:</p>
 
 

@@ -244,9 +244,9 @@ const Attendance = ({ avgAttendance, presentCount, absentCount, testAtn }) => {
                                         <td>{studentList.lastName}</td>
                                         <td>{studentList.regNo}</td>
                                         <td>
-                                            <button onClick={() => handleButtonPresent(index)}>Present</button>
-                                            <button onClick={() => handleButtonAbsent(index)}>Absent</button>
-                                            <button onClick={() => handleResetButton(index)}>Reset</button>
+                                            <button className="present-btn" onClick={() => handleButtonPresent(index)}>Present</button>
+                                            <button className="absent-btn" onClick={() => handleButtonAbsent(index)}>Absent</button>
+                                            <button className="reset-btn" onClick={() => handleResetButton(index)}>Reset</button>
                                         </td>
                                         <td><b>Present:</b> <span>{studentList.presentCount}</span> <b>Absent:</b> <span>{studentList.absentCount}</span> </td>
                                         <td>
