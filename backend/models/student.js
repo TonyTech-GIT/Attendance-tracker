@@ -23,8 +23,6 @@ const studentSchema = mongoose.Schema({
         minlength: [9],
         maxlength: [11],
         match: /^(?:\+234|0)\d{10}$/
-        // validate(value),
-        // if (!/^[0-9]+$/.test(value)) throw new Error("Contact")
     },
     guardianNum: {
         type: Number,

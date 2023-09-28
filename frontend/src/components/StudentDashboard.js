@@ -360,7 +360,7 @@ const StudentDashboard = ({ authDetails }) => {
 
                             <li onClick={handleAdminProfile}> Student Profile</li>
 
-                            <li onClick={navigateReportPage}>Attendance Report</li>
+                            {/* <li onClick={navigateReportPage}>Attendance Report</li> */}
 
 
 
@@ -462,10 +462,10 @@ const StudentDashboard = ({ authDetails }) => {
                     </div> */}
                     <div className="student-overall flex">
                         <div className="student-overall_img1">
-                            <img src="../components/assets/Students profile.png" alt="student-profile" />
+                            <img src={process.env.PUBLIC_URL + '/assets/graduation-4474213_1280.png'} alt="student-profile" />
                         </div>
                         <div className="student-overall_img2">
-                            <img src="../components/assets/attendance-record.png" alt="attendance-record" />
+                            <img src={process.env.PUBLIC_URL + '/assets/reading.png'} alt="reading" />
                         </div>
 
                     </div>

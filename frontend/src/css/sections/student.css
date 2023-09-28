@@ -328,8 +328,17 @@
       height: 450px;
       width: 632px;
       margin: 1em auto;
+      padding-inline: 1em;
       border-radius: 2px;
+
+      justify-content: space-between;
+      align-items: center;
     }
+    .student-overall .student-overall_img1 img, .student-overall .student-overall_img2 img{
+      width: 250px;
+    }
+    
+    
     /* .main-footer{
   
     } */

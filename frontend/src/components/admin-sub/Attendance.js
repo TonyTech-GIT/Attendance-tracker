@@ -105,6 +105,7 @@ const Attendance = ({ avgAttendance, presentCount, absentCount, testAtn }) => {
         setSelectedStudentIndex(studentIndex)
 
         setStudentLists(prevLists => {
+
             const updatedLists = [...prevLists];
             updatedLists[studentIndex].presentCount++;
             updatedLists[studentIndex].attendanceRate = calcAveragePercentage(
@@ -146,6 +147,7 @@ const Attendance = ({ avgAttendance, presentCount, absentCount, testAtn }) => {
         setSelectedStudentIndex(studentIndex)
 
         setStudentLists(prevLists => {
+
             const updatedLists = [...prevLists]
             updatedLists[studentIndex].absentCount++;
 
@@ -155,7 +157,6 @@ const Attendance = ({ avgAttendance, presentCount, absentCount, testAtn }) => {
                 5 // Assuming 5 days
 
             );
-
 
             const newAverageAttendance = calcAveragePercentage(
                 updatedLists[studentIndex].presentCount,
