@@ -7,3 +7,18 @@ module.exports = {
         filename: 'bundle.js',
     },
 };
+
+// {
+//     output: {
+//       path: './build',
+//       publicPath: '/',
+//     },
+//     plugins: [
+//       new CopyWebpackPlugin([
+//         {
+//           from: './node_modules',
+//           to: './build/node_modules',
+//         },
+//       ]),
+//     ],
+//   }
