@@ -58,7 +58,7 @@ const IndividualStu = ({ attendanceReceived, presentReceived, absentReceived, te
         console.log('present value', presentReceived);
         console.log('absent value', absentReceived);
 
-
+        // eslint-disable-next-line
     }, [])
 
     // [attendanceReceived, presentReceived, absentReceived, detailStu],

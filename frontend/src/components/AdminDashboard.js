@@ -58,6 +58,8 @@ const AdminDashboard = ({ authDetails }) => {
     }
     )
 
+    console.log(setTestData);
+
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
 

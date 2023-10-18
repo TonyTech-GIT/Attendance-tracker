@@ -1,5 +1,5 @@
 import DashBtn from "./DashBtn"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose, faExclamationCircle, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
@@ -33,7 +33,7 @@ const StudentDashboard = ({ authDetails }) => {
     const [dataStuTest, setDataStuTest] = useState(null)
 
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
 
     const handleAdminProfile = () => {
@@ -170,9 +170,9 @@ const StudentDashboard = ({ authDetails }) => {
         setErrorMessage('')
     ]
 
-    const navigateReportPage = () => {
-        navigate('/auth/admin/report')
-    }
+    // const navigateReportPage = () => {
+    //     navigate('/auth/admin/report')
+    // }
 
     return (
         <div>
