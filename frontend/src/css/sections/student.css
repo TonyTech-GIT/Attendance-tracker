@@ -1,35 +1,35 @@
 /* STUDENT DASHBOARD START... */
 
 /* STUDENT HEADER START... */
-.student-header{
-    background-color: var(--fourth-clr);
-    padding: 2em 1em;
-  }
-  .student-header h1{
-    font-size: 2em;
-  }
-  
-  .log-profile{
-    margin-right: 2em;
-  }
-  .log-profile .profile{
-    background-color: #f1faee;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    margin-right: 1em;
-  }
-  
-  .log-profile .profile .profile-icon{
-    position: relative;
-    top: 15px;
-    left: 18px;
-    color: lightgray;
-  }
-  
-  /* STUDENT-MODAL-ME- START... */
-  .student-modal-me{
-    background-color: rgba(49, 49, 49, 0.4);
+.student-header {
+  background-color: var(--fourth-clr);
+  padding: 2em 1em;
+}
+.student-header h1 {
+  font-size: 2em;
+}
+
+.log-profile {
+  margin-right: 2em;
+}
+.log-profile .profile {
+  background-color: #f1faee;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-right: 1em;
+}
+
+.log-profile .profile .profile-icon {
+  position: relative;
+  top: 15px;
+  left: 18px;
+  color: lightgray;
+}
+
+/* STUDENT-MODAL-ME- START... */
+.student-modal-me {
+  background-color: rgba(49, 49, 49, 0.4);
   position: fixed;
   top: 0;
   left: 0;
@@ -37,275 +37,256 @@
   right: 0;
   height: 100vh;
   width: 100vw;
-  
-    >.profile{
-      
-      /* background-color: #eee; */
-      height: 550px;
-      width: 800px;
-      margin:  5vh auto;
-      border-radius: 2px;
-      padding: 1em 1em;
-  
-      >.profile-container{
-        >.profile-1{
-          width: 50%;
-    
-          >label{
-            display: flex;
-            /* width: 150%; */
-            padding: 1em;
-            /* font-weight: bold; */
-      
-            >input{
-              width: 50%;
-              padding-block: .15em;
-      
-              &:focus{
-                outline: none;
-              }
-            }
-      
-            & .label-firstName-text, .label-lastName-text{
-              margin-left: 1.8em;
-            }
-      
-            & .label-gender-text{
-              margin-left: 3.5em
-            }
-      
-            & .label-courses-text, .label-contact-text{
-              margin-left: 3.2em;
-            }
-          }
-    
-        }
-    
-        >.profile-2{
-          width: 50%;
-          >label{
-            display: flex;
-            padding: 1em;
-            /* font-weight: bold; */
-      
-            >input{
-              width: 50%;
-              padding-block: .12em;
-      
-              &:focus{
-                outline: none;
-              }
-            }
-      
-            & .label-guardianNum-text{
-              margin-left: 1.75em;
-            }
-  
-            & .label-regNo-text{
-              margin-left: 8.3em;
-            }
-      
-            & .label-department-text{
-              margin-left: 5em
-            }
-      
-            & .label-homeAddress-text{
-              margin-left: 3.6em;
-            }
-  
-            & .label-secondContact-text{
-              margin-left: 2.8em;
-            }
-  
-            >.facial-recog-btn{
-              background-color: #ddd;
-              cursor: pointer;
-              align-items: center;
-              padding: .5em;
-              margin-left: 1.5em;
-              border-radius: 2px;
-              /* border: none; */
-              transition: all 200ms ease-in-out;
-  
-                &:hover {
-                  transform: scale(1.1);
-                }
-            }
-  
-            
-          }
-    
-        }
-      }
-     
-      
-  
-      >label:not(:last-child){
-        /* padding: .7em 3%; */
-        margin-bottom: 1em;
-      }
-  
-      .admin-me-cta{
-        margin-inline: 1em;
-        gap: 1em;
-  
-        >button{
-          padding: .5em;
-          cursor: pointer;
-          border: none;
-          border-radius: 2px;
-          margin: 2em 1em;
-          transition: all 200ms ease-in-out;
-  
-          &:hover{
-          transform: scale(1.1);
-  
-          }
-        }
-  
-  
-        >.cancel-btn{
-          background-color: lightcoral;
-        }
-  
-        >.confirm-btn{
-          background-color: lightgreen;
-        }
 
-        >.update-btn{
-          background-color: #ddd;
+  > .profile {
+    /* background-color: #eee; */
+    height: 550px;
+    width: 800px;
+    margin: 5vh auto;
+    border-radius: 2px;
+    padding: 1em 1em;
+
+    > .profile-container {
+      > .profile-1 {
+        width: 50%;
+
+        > label {
+          display: flex;
+          /* width: 150%; */
+          padding: 1em;
+          /* font-weight: bold; */
+
+          > input {
+            width: 50%;
+            padding-block: 0.15em;
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          & .label-firstName-text,
+          .label-lastName-text {
+            margin-left: 1.8em;
+          }
+
+          & .label-gender-text {
+            margin-left: 3.5em;
+          }
+
+          & .label-courses-text,
+          .label-contact-text {
+            margin-left: 3.2em;
+          }
         }
-        
+      }
+
+      > .profile-2 {
+        width: 50%;
+        > label {
+          display: flex;
+          padding: 1em;
+          /* font-weight: bold; */
+
+          > input {
+            width: 50%;
+            padding-block: 0.12em;
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          & .label-guardianNum-text {
+            margin-left: 1.75em;
+          }
+
+          & .label-regNo-text {
+            margin-left: 8.3em;
+          }
+
+          & .label-department-text {
+            margin-left: 5em;
+          }
+
+          & .label-homeAddress-text {
+            margin-left: 3.6em;
+          }
+
+          & .label-secondContact-text {
+            margin-left: 2.8em;
+          }
+
+          > .facial-recog-btn {
+            background-color: #ddd;
+            cursor: pointer;
+            align-items: center;
+            padding: 0.5em;
+            margin-left: 1.5em;
+            border-radius: 2px;
+            /* border: none; */
+            transition: all 200ms ease-in-out;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+    }
+
+    > label:not(:last-child) {
+      /* padding: .7em 3%; */
+      margin-bottom: 1em;
+    }
+
+    .admin-me-cta {
+      margin-inline: 1em;
+      gap: 1em;
+
+      > button {
+        padding: 0.5em;
+        cursor: pointer;
+        border: none;
+        border-radius: 2px;
+        margin: 2em 1em;
+        transition: all 200ms ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      > .cancel-btn {
+        background-color: lightcoral;
+      }
+
+      > .confirm-btn {
+        background-color: lightgreen;
+      }
+
+      > .update-btn {
+        background-color: #ddd;
       }
     }
   }
-  
-  /* STUDENT-MODAL-ME- END... */
-  
-  /* STUDENT HEADER END... */
-  
-  
-  
-  /* STUDENT BODY START... */
-  
-  .admin-body-section{
-    grid-template-columns: 25% 50% 25%;
-    /* margin-block-start: 2em; */
+}
+
+/* STUDENT-MODAL-ME- END... */
+
+/* STUDENT HEADER END... */
+
+/* STUDENT BODY START... */
+
+.admin-body-section {
+  grid-template-columns: 25% 50% 25%;
+  /* margin-block-start: 2em; */
+}
+
+/* STUDENT ASIDE-LEFT START... */
+.admin-body-section .admin-aside-left {
+  min-height: 100vh;
+  /* background-color: #457b9d; */
+  background-color: var(--third-clr);
+}
+
+.admin-body-section .admin-aside-left .aside-lists ul {
+  padding-left: 1em;
+  list-style: none;
+  margin-top: 2em;
+}
+.admin-body-section .admin-aside-left .aside-lists ul li:not(:last-child) {
+  margin-bottom: 1.5em;
+}
+
+.admin-body-section {
+  .admin-aside-left {
+    .aside-lists ul li {
+      width: 80%;
+      padding-block: 0.35em;
+      padding-left: 1em;
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+    }
   }
-  
-  /* STUDENT ASIDE-LEFT START... */
-  .admin-body-section .admin-aside-left{
-    min-height: 100vh;
-    /* background-color: #457b9d; */
-    background-color: var(--third-clr);
-  }
-  
-  .admin-body-section .admin-aside-left .aside-lists ul{
-    padding-left: 1em;
-    list-style: none;
-    margin-top: 2em;
-  }
-  .admin-body-section .admin-aside-left .aside-lists ul li:not(:last-child){
-    margin-bottom: 1.5em;
-  }
-  
-  
-  .admin-body-section {
-    .admin-aside-left {
-  
-      .aside-lists ul li {
-        width: 80%;
-        padding-block: .35em;
-        padding-left: 1em;
-        cursor: pointer;
-        transition: all 200ms ease-in-out;
-      }
-    } 
-  }
-  
-  
-  .admin-body-section .admin-aside-left .aside-lists ul li:hover{
-    /* background-color: #1d3557; */
-    background-color: var(--fourth-clr);
-    width: 80%;
-    padding-block: .35em;
-    padding-left: 1em;
-    color: #eee;
-    cursor: pointer;
-    transform: translateX(12px);
-  }
-  
-  /* STUDENT-STATIC MODAL PROFILE...STARTS */
-  
-  /* >.label-info{
+}
+
+.admin-body-section .admin-aside-left .aside-lists ul li:hover {
+  /* background-color: #1d3557; */
+  background-color: var(--fourth-clr);
+  width: 80%;
+  padding-block: 0.35em;
+  padding-left: 1em;
+  color: #eee;
+  cursor: pointer;
+  transform: translateX(12px);
+}
+
+/* STUDENT-STATIC MODAL PROFILE...STARTS */
+
+/* >.label-info{
     
   
     
   } */
-  .modal-1 .content{
-    width: 40%;
-  }
-  .modal-1 .content .modal-1_icon{
-    left: 19em;
-  }
-  .student-label-info{
-  
-    padding: 5em 2em;
+.modal-1 .content {
+  width: 40%;
+}
+.modal-1 .content .student-modal-1_icon {
+  left: 19em;
+}
+.student-label-info {
+  padding: 5em 2em;
 
-    /* width: 100%; */
-  
-    >.label-info-1{
-      >label {
-        display: flex;
-        /* font-weight: bold; */
-    
-        >p{
-          font-size:.95rem;
-          margin-left: 1em;
-          font-weight: bold;
-        }
-  
-        
-      }
-    
-      >label:not(:last-child){
-        margin-bottom: 2em;
+  /* width: 100%; */
+
+  > .label-info-1 {
+    > label {
+      display: flex;
+      /* font-weight: bold; */
+
+      > p {
+        font-size: 0.95rem;
+        margin-left: 1em;
+        font-weight: bold;
       }
     }
-  
-    >.label-info-2{
-      >label {
-        display: flex;
-        /* font-weight: bold; */
-    
-        >p{
-          font-size:.95rem;
-          margin-left: 1em;
-          font-weight: bold;
-        }
-      }
-    
-      >label:not(:last-child){
-        margin-bottom: 2em;
-      }
+
+    > label:not(:last-child) {
+      margin-bottom: 2em;
     }
   }
-  
-  
-  /* STUDENT-STATIC MODAL PROFILE...ENDS */
-  
-  /* STUDENT ASIDE LEFT END... */
 
-  
-  
-  /* STUDENT-MAIN START... */
-  
-  .admin-body-section .admin-main{
-    /* background-color: #e63946; */
-    background-color: var(--fourth-clr);
-  
-    /* ANALYTICS 1 & 2 */
-    /* .analytics {
+  > .label-info-2 {
+    > label {
+      display: flex;
+      /* font-weight: bold; */
+
+      > p {
+        font-size: 0.95rem;
+        margin-left: 1em;
+        font-weight: bold;
+      }
+    }
+
+    > label:not(:last-child) {
+      margin-bottom: 2em;
+    }
+  }
+}
+
+/* STUDENT-STATIC MODAL PROFILE...ENDS */
+
+/* STUDENT ASIDE LEFT END... */
+
+/* STUDENT-MAIN START... */
+
+.admin-body-section .admin-main {
+  /* background-color: #e63946; */
+  background-color: var(--fourth-clr);
+
+  /* ANALYTICS 1 & 2 */
+  /* .analytics {
       justify-content: center;
       margin-top: 1em;
   
@@ -321,47 +302,46 @@
   
       }
     } */
-    
-    /* ANALYTICS-OVERALL... */
-    .student-overall{
-      background-color: var(--second-clr);
-      height: 450px;
-      width: 632px;
-      margin: 1em auto;
-      padding-inline: 1em;
-      border-radius: 2px;
 
-      justify-content: space-between;
-      align-items: center;
-    }
-    .student-overall .student-overall_img1 img, .student-overall .student-overall_img2 img{
-      width: 250px;
-    }
-    
-    
-    /* .main-footer{
+  /* ANALYTICS-OVERALL... */
+  .student-overall {
+    background-color: var(--second-clr);
+    height: 450px;
+    width: 632px;
+    margin: 1em auto;
+    padding-inline: 1em;
+    border-radius: 2px;
+
+    justify-content: space-between;
+    align-items: center;
+  }
+  .student-overall .student-overall_img1 img,
+  .student-overall .student-overall_img2 img {
+    width: 250px;
+  }
+
+  /* .main-footer{
   
     } */
-  }
-  
-  /* STUDENT-MAIN END */
-  
-  /* ASIDE-RIGHT START... */
-  .admin-body-section{
-    >.admin-aside-right{
-      background-color: #1d3557;
-  
-        >.aside-sched{
-          background-color: #eee;
-          height: 300px;
-          width: 300px;
-          margin: 1em auto;
-          border-radius: 2px;
-      }
+}
+
+/* STUDENT-MAIN END */
+
+/* ASIDE-RIGHT START... */
+.admin-body-section {
+  > .admin-aside-right {
+    background-color: #1d3557;
+
+    > .aside-sched {
+      background-color: #eee;
+      height: 300px;
+      width: 300px;
+      margin: 1em auto;
+      border-radius: 2px;
     }
-  
-  } 
-  
-  /* ASIDE-RIGHT END... */
-  
-  /* STUDENT DASHBOARD END... */
+  }
+}
+
+/* ASIDE-RIGHT END... */
+
+/* STUDENT DASHBOARD END... */

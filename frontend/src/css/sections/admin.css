@@ -1,752 +1,738 @@
 /* ADMIN DASHBOARD START... */
-.admin-header{
-    background-color: var(--third-clr);
-    padding: 2em 1em;
+.admin-header {
+  background-color: var(--third-clr);
+  padding: 2em 1em;
 
+  position: relative;
+
+  /* overflow-x: hidden;
+
+  overflow-y: hidden; */
+
+  @media (max-width: 576px) {
+    padding: 1em 0;
+  }
+}
+.admin-header h1 {
+  font-size: 2em;
+
+  @media (max-width: 576px) {
+    font-size: 1.5em;
+  }
+}
+
+.log-profile {
+  margin-right: 2em;
+
+  > .profile {
+    background-color: #f1faee;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 1em;
+  }
+
+  > .profile-icon {
     position: relative;
-  
-    @media(max-width: 576px){
-      padding: 1em 0;
-    }
+    top: 15px;
+    left: 18px;
+    color: lightgray;
   }
-  .admin-header h1{
-    font-size: 2em;
-  
-    @media(max-width: 576px){
-      font-size: 1.5em;
-    }
+}
+
+/* MENU-BTN... STARTS */
+@media (max-width: 576px) {
+  .menuBtn {
+    cursor: pointer;
   }
-  
-  .log-profile{
-    margin-right: 2em;
-  
-    >.profile{
-      background-color: #f1faee;
-      height: 50px;
-      width: 50px;
-      border-radius: 50%;
-      margin-right: 1em;
-  
-    }
-  
-    >.profile-icon{
-      position: relative;
-      top: 15px;
-      left: 18px;
-      color: lightgray;
-    }
-  
+  .menuBtn div {
+    background-color: #000;
+    height: 3px;
+    width: 20px;
+    transition: 0.4s;
+  }
+  .menuBtn div:not(:last-child) {
+    margin-bottom: 4px;
   }
 
-  /* MENU-BTN... STARTS */
-  @media(max-width: 576px){
-    .menuBtn{
-        cursor: pointer;
-        
-      }
-      .menuBtn div{
-        background-color: #000;
-        height: 3px;
-        width: 20px;
-        transition: 0.4s;
-      }
-      .menuBtn div:not(:last-child){
-        margin-bottom: 4px;
-    
-      }
-
-      .change .bar-1{
-        transform: translate(0, 11px) rotate(-45deg);
-      }
-      .change .bar-2{
-        opacity: 0;
-      }
-      .change .bar-3{
-        transform: translate(0, -3px) rotate(45deg);
-      }
+  .change .bar-1 {
+    transform: translate(0, 11px) rotate(-45deg);
   }
-  /* MENU-OVERLAY */
-  .menuOverlay{
+  .change .bar-2 {
+    opacity: 0;
+  }
+  .change .bar-3 {
+    transform: translate(0, -3px) rotate(45deg);
+  }
+}
+/* MENU-OVERLAY */
+.menuOverlay,
+.menuOverlay ul {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .menuOverlay {
+    /* display: block; */
+    display: none;
+
+    height: 160vh;
+    width: 50%;
+
+    background-color: var(--third-clr);
+
+    position: absolute;
+    top: 5.2em;
+    right: 0em;
+    /* right: -50%; */
+
+    transition: 0.4s;
+
+    z-index: 11000;
+  }
+  .menuOverlay ul {
+    display: block;
+
+    list-style: none;
+
+    padding: 3em 1em;
+  }
+  .menuOverlay ul li {
+    cursor: pointer;
+
+    padding: 2px;
+
+    transition: all 200ms ease-in-out;
+  }
+  .menuOverlay ul li:hover {
+    background-color: var(--fourth-clr);
+    color: #eee;
+  }
+  .menuOverlay ul li:not(:last-child) {
+    margin-bottom: 2em;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile,
+  .profile-icon {
+    display: block;
+  }
+
+  .dashBtn {
     display: none;
   }
-  @media(max-width: 576px){
-    .menuOverlay{
-        display: block;
 
-        height: 100vh;
-        width: 50%;
+  .mobile-btn {
+    background-color: var(--second-clr);
 
-        background-color: var(--third-clr);
+    position: relative;
 
-        position: absolute;
-        top: 5.2em;
-        /* right: 0em; */
-        right: -50%;
+    top: 12em;
 
-        transition: 0.4s;
+    padding: 0.4em 0.6em;
+    border: none;
+    border-radius: 2px;
 
-        z-index: 11000;
-    }
-    .menuOverlay ul{
-        list-style: none;
-        
-        padding: 3em 1em;
-    }
-    .menuOverlay ul li{
-        cursor: pointer;
-
-        padding: 2px;
-
-        transition: all 200ms ease-in-out;
-    }
-    .menuOverlay ul li:hover{
-        background-color: var(--fourth-clr);
-        color: #eee;
-    }
-    .menuOverlay ul li:not(:last-child){
-        margin-bottom: 2em;
-    }
-  }
-  
-  @media(max-width: 576px){
-    .profile, .profile-icon{
-        display: block;
-    }
-  
-    .dashBtn{
-      display: none;
-    }
-
-    .mobile-btn{
-        background-color: var(--second-clr);
-
-        position: relative;
-
-        top: 12em;
-
-        padding: .4em .6em;
-        border: none;
-        border-radius: 2px;
-
-        cursor: pointer;
-        transition: 200ms ease-in;
-    }
-    .mobile-btn:hover{
-        transform: scale(1.1);
-    }
-  }
-
-    /* MENU-BTN... ENDS*/
-
-  
-  
-  /* ADMIN-BODY START... */
-  .admin-body-section{
-    grid-template-columns: 25% 50% 25%;
-    margin-block-start: 2em;
-
-  }
-
- 
-  
-  /* ASIDE-LEFT... */
-  .admin-body-section .admin-aside-left{
-    min-height: 100vh;
-    background-color: #457b9d;
-
-    @media(max-width:576px){
-        display: none;
-    }
-  }
-  
-  .admin-body-section .admin-aside-left .aside-lists ul{
-    padding-left: 1em;
-    list-style: none;
-    margin-top: 2em;
-  }
-  .admin-body-section .admin-aside-left .aside-lists ul li:not(:last-child){
-    margin-bottom: 1.5em;
-  }
-  
-  
-  .admin-body-section {
-    .admin-aside-left {
-  
-      .aside-lists ul li {
-        width: 80%;
-        padding-block: .35em;
-        padding-left: 1em;
-        cursor: pointer;
-        transition: all 200ms ease-in-out;
-      }
-    } 
-  }
-  
-  
-  .admin-body-section .admin-aside-left .aside-lists ul li:hover{
-    background-color: #1d3557;
-    width: 80%;
-    padding-block: .35em;
-    padding-left: 1em;
-    color: #eee;
     cursor: pointer;
-    transform: translateX(12px);
+    transition: 200ms ease-in;
   }
-  
-  /* MODAL BOX - 1.... */
-  
-  .modal-1{
-    background-color: rgba(49, 49, 49, 0.4);
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100vh;
-    width: 100vw;
-    z-index: 999;
-  
-    >.content{
-      background-color: #eee;
-      height: 500px;
-      width: 600px;
-      margin: 19vh auto;
-      border-radius: 2px;
-      position: relative;
-  
-      >.modal-1_icon{
-        font-size: 2em;
-        position: absolute;
-        top: .5em;
-        left: 17.5em;
-        cursor: pointer;
-      }
-  
-      >.label-info{
-        padding: 5em 4em;
-  
-        >label {
-          display: flex;
-  
-          >p{
-            font-size:.95rem;
-            margin-left: 1em;
-            font-weight: bold;
-          }
-        }
-  
-        >label:not(:last-child){
-          margin-bottom: 2em;
-        }
-      }
-        
+  .mobile-btn:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* MENU-BTN... ENDS*/
+
+/* ADMIN-BODY START... */
+.admin-body-section {
+  grid-template-columns: 25% 50% 25%;
+  margin-block-start: 2em;
+}
+
+/* ASIDE-LEFT... */
+.admin-body-section .admin-aside-left {
+  min-height: 100vh;
+  background-color: #457b9d;
+
+  @media (max-width: 576px) {
+    display: none;
+  }
+}
+
+.admin-body-section .admin-aside-left .aside-lists ul {
+  padding-left: 1em;
+  list-style: none;
+  margin-top: 2em;
+}
+.admin-body-section .admin-aside-left .aside-lists ul li:not(:last-child) {
+  margin-bottom: 1.5em;
+}
+
+.admin-body-section {
+  .admin-aside-left {
+    .aside-lists ul li {
+      width: 80%;
+      padding-block: 0.35em;
+      padding-left: 1em;
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
     }
   }
-  /* MODAL-BOX-END... */
-  
-  
-  
-  /* ADMIN-MODAL-ME- START... */
-  .modal-me{
-    background-color: rgba(49, 49, 49, 0.4);
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100vh;
-    width: 100vw;
-    z-index: 999;
-  
-    >.profile-modal{
-      
-      background-color: #eee;
-      height: 500px;
-      width: 600px;
-      margin:  12vh auto;
-      border-radius: 0;
-      padding: 2em 1em;
-      position: relative;
-      z-index: 10000;
-  
-      >.modal-1_icon{
-        font-size: 2em;
-        position: absolute;
-        top: .8em;
-        left: 16.5em;
-        cursor: pointer;
-      }
-  
-      >.label-courses{
-        
-        & label{
-          margin-left: 2.5em;
-  
-          &:nth-child(2), &:nth-child(3){
-            margin-left: 1em;
-          }
-        }
-      }
-    
-      >label{
-        display: flex;
-        padding: 1em;
-        font-weight: bold;
-    
-        >input{
-          width: 30%;
-          padding-block: .15em;
-    
-          &:focus{
-            outline: none;
-          }
-        }
-  
-        
-    
-        & .label-firstName-text, .label-lastName-text{
-          margin-left: 1.8em;
-        }
-    
-        & .label-gender-text{
-          margin-left: 3.5em
-        }
-    
-        & .label-courses-text, .label-contact-text{
-          margin-left: 2.8em;
-        }
-  
-      }
-    
-      >label:not(:last-child){
-        /* padding: .7em 3%; */
-        /* margin-bottom: 1em; */
-      }
-    
-      .admin-me-cta{
-        margin-inline: 1em;
-        gap: 1em;
-    
-        >button{
-          padding: .5em;
-          cursor: pointer;
-          border: none;
-          border-radius: 2px;
-          transition: all 200ms ease-in-out;
-    
-          &:hover{
-          transform: scale(1.1);
-    
-          }
-        }
-    
-    
-        >.cancel-btn{
-          background-color: lightcoral;
-        }
-    
-        >.confirm-btn{
-          background-color: lightgreen;
-        }
-  
-        >.update-btn{
-          background-color: #ddd;
-        }
-        
-      }
+}
 
-      @media(max-width: 576px){
-        height: 450px;
-        width: 400px;
-        padding: 1em auto;
+.admin-body-section .admin-aside-left .aside-lists ul li:hover {
+  background-color: #1d3557;
+  width: 80%;
+  padding-block: 0.35em;
+  padding-left: 1em;
+  color: #eee;
+  cursor: pointer;
+  transform: translateX(12px);
+}
 
-        .modal-1_icon{
-            left: 10.8em;
-        }
+/* MODAL BOX - 1.... */
 
-        >label{
-            font-size: 14px;
+.modal-1 {
+  background-color: rgba(49, 49, 49, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 999;
 
-            >input{
-                width: 50%;
-                padding: .12em;
-            }
-        }
-
-        .admin-me-cta{
-            margin-top: 1em;
-            
-            >button{
-                padding: .3em;
-            }
-        }
-
-      }
-    }
-
-    /* @media(max-width: 576px) {
-
-    } */
-  
-    
-  }
-  
-  /* ADMIN-MODAL-ME- END... */
-
-  
-  /* ADMIN-LEFT REPORT PAGE START... */
-    .admin-report{
-  
-      .report-header{
-        margin-block-start: 1em;
-        margin-left: .5em;
-        font-size: 2em;
-        font-weight: bold;
-      }
-  
-      .reportBtn {
-        margin: 1.5em 0 1em 1em;
-        padding: .5em;
-        cursor: pointer;
-        border: none;
-        border-radius: 2px;
-        background-color: #1d3557;
-        color: #eee;
-        transition: all 300ms ease-in-out;
-  
-        &:hover {
-          transform: scale(1.02);
-        }
-      }
-  
-      .student-list{
-  
-        .student-links{
-            text-decoration: none;
-            color: inherit;
-  
-          .student{
-            list-style: none;
-            margin: 1.5em 1em;
-            background-color: #ddd;
-            padding: 2em 1em;
-            border-radius: 2px;
-            max-width: 1500px;
-            cursor: pointer;
-            transition: all 300ms ease-in-out;
-    
-              >p{
-                margin-top: 1em;
-              }
-          }
-  
-        }
-  
-        
-  
-        .student:hover {
-          border-left: 6px solid #1d3557;
-          /* transition: all 300ms ease-in-out; */
-          transform: scale(1.02);
-  
-        }
-      }
-    }
-  /* ADMIN-LEFT REPORT PAGE END... */
-  
-  
-  /* ADMIN-LEFT INDIVIDUAL STUDENT REPORT PAGE START */
-  .student-report{
+  > .content {
+    background-color: #eee;
     height: 500px;
     width: 600px;
-    background-color: #ddd;
-    margin: 2em auto;
-    padding-inline: 1em;
-  
-    >.header{
-      text-align: center;
-      padding-block: 1em;
+    margin: 19vh auto;
+    border-radius: 2px;
+    position: relative;
+
+    @media (max-width: 576px) and (max-width: 767px) {
+      height: 400px;
+      min-width: 300px;
     }
-  
-    >.report-text{
-      padding-block: 1em .8em;
+
+    > .modal-1_icon {
+      font-size: 2em;
+      position: absolute;
+      top: 0.8em;
+      left: 15em;
+      cursor: pointer;
+
+      @media (max-width: 576px) and (max-width: 767px) {
+        top: 0.3em;
+        left: 8em;
+      }
     }
-  
-    >.report-form{
-  
-      >.class-present-container{
-        >.present-label{
-          margin-right: 1em;
-  
-          font-weight: bold;
-        }
+
+    > .label-info {
+      padding: 5em 4em;
+
+      @media (max-width: 576px) and (max-width: 767px) {
+        padding: 2em 2em;
       }
-  
-  
-      >.class-absent-container{
-        margin-block: 1em;
-  
-        >.absent-label{
-          margin-right: 1.3em;
-  
-          font-weight: bold;
-        }
-      }
-  
-      >.attendance-rate-container{
-        >label{
-          font-weight: bold;
-        }
-      }
-  
-      .class-present-container, .class-absent-container, .attendance-rate-container{
-  
-        >input[type = text]{
-          margin-left: 1.8em;
-        }
-  
-        >.atn-value{
-          margin-left: .5em;
-        }
-  
-      }
-  
-      .class-present-container{
-        >input[type = text]{
-          margin-left: 1.35em;
-        }
-      }
-  
-      .attendance-rate-container{
-        >input[type = text]{
-          margin-left: .55em;
-        }
-      }
-  
-      >.btn-container{
-        margin-top: 2em;
+
+      > label {
         display: flex;
-        gap: 1em;
-  
-        >.download-btn{
-          background-color: #c4bcbc;
-          padding: .4em;
-          border: none;
-          border-radius: 1px;
-          cursor: pointer;
-          transition: all 300ms ease-in-out;
-  
-          &:hover {
-            transform: scale(1.1);
-          }
+
+        > p {
+          font-size: 0.95rem;
+          margin-left: 1em;
+          font-weight: bold;
         }
-  
-        >.cancel-btn{
-          background-color: #f56767;
-          padding: .4em;
-          border: none;
-          border-radius: 1px;
-          cursor: pointer;
-          transition: all 300ms ease-in-out;
-  
-          &:hover {
-            transform: scale(1.1);
-          }
-        }
-        
       }
-      
+
+      > label:not(:last-child) {
+        margin-bottom: 2em;
+      }
     }
   }
-  
-  
-  
-  /* ADMIN-LEFT INDIVIDUAL STUDENT REPORT PAGE END */
-  
-  /* ADMIN-LEFT ATTENDANCE PAGE START */
-  .attendance-section {
-  
-    .attendance-btn{
-      background-color: #1d3557;
-      color: #eee;
-      margin: 1em 0 0 2.2em;
-      padding: .5em;
-      border: none;
-      border-radius: 2px;
+}
+/* MODAL-BOX-END... */
+
+/* ADMIN-MODAL-ME- START... */
+.modal-me {
+  background-color: rgba(49, 49, 49, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 11500;
+
+  > .profile-modal {
+    background-color: #eee;
+    height: 500px;
+    width: 600px;
+    margin: 12vh auto;
+    border-radius: 0;
+    padding: 2em 1em;
+    position: relative;
+    z-index: 10000;
+
+    /* @media (max-width: 576px) and (max-width: 767px) {
+      width: 200px;
+    } */
+
+    > .modal-1_icon {
+      font-size: 2em;
+      position: absolute;
+      top: 0.8em;
+      left: 16.5em;
       cursor: pointer;
-      transition: all 200ms ease-in-out;
-  
-      &:hover {
-        transform: scale(1.1);
+
+      @media (max-width: 576px) and (max-width: 767px) {
+        top: 0.3em;
+        left: 8em;
       }
     }
-    .atn-btn{
-      margin: 6px 4px;
-      padding: .35em;
-      background-color: #1d3557;
-      color: #eee;
-      border: none;
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all 200ms ease-in-out;
-  
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-    .table-container{
-      /* border: 1px solid #000; */
-      margin: 30px;
-      > table, tr,th, td{
-        border: 1px solid black;
-        border-collapse: collapse;
-        padding: 0.25em;
-      }
-  
-      .table-body{
-        > tr td button {
-          padding: .25em;
-          cursor: pointer;
-          border-radius: 2px;
-          border: none;
-          transition: all 200ms ease-in-out;
-  
-            &:hover {
-                transform: scale(1.1);
-            }
-  
-          &:not(:last-child){
-            margin-right: 1.5em;
-          }
-        }
 
-        .present-btn{
-            background-color: lightgreen;
-        }
-        .absent-btn{
-            background-color: lightcoral;
-        }
-        .reset-btn{
-            background-color: #ddd;
+    > .label-courses {
+      & label {
+        margin-left: 2.5em;
+
+        &:nth-child(2),
+        &:nth-child(3) {
+          margin-left: 1em;
         }
       }
-  
-      
-      
     }
-  }
-  
-  
-  /* ADMIN-LEFT ATTENDANCE PAGE END */
-  
-  /* ADMIN-MAIN... */
-  
-  @media(max-width:576px){
-    .admin-body-section{
-        max-height: 600vh;
-        width: 100%;
-    }
-  }
-  
-  .admin-body-section .admin-main{
-    
-    @media(max-width:576px){
-        background-color: var(--third-clr);
 
-        min-height: 100vh;
-        min-width: 400%;
+    > label {
+      display: flex;
+      padding: 1em;
+      font-weight: bold;
 
+      > input {
+        width: 30%;
+        padding-block: 0.15em;
 
-        >h1{
-            text-align: center;
-
-            font-size: 1.6em;
+        &:focus {
+          outline: none;
         }
+      }
+
+      & .label-firstName-text,
+      .label-lastName-text {
+        margin-left: 1.8em;
+      }
+
+      & .label-gender-text {
+        margin-left: 3.5em;
+      }
+
+      & .label-regNo-text {
+        margin-left: 3.8em;
+      }
+
+      & .label-courses-text,
+      .label-contact-text {
+        margin-left: 2.8em;
+      }
     }
 
-  
-    /* ANALYTICS 1 & 2 */
-    .analytics {
-      justify-content: center;
-      margin-top: 1em;
+    /* > label:not(:last-child) {
+      padding: .7em 3%;
+      margin-bottom: 1em;
+    } */
 
-      @media(max-width: 576px){
-        flex-direction: column;
+    .admin-me-cta {
+      margin-inline: 1em;
+      gap: 1em;
 
-        justify-content: start;
-        min-height: 80%;
-
-        gap: 2em;
-
-        padding: 1em 0;
-      }
-  
-      .analy-1, .analy-2{
-        background-color: #eee;
-        height: 200px;
-        width: 300px;
+      > button {
+        padding: 0.5em;
+        cursor: pointer;
+        border: none;
         border-radius: 2px;
+        transition: all 200ms ease-in-out;
 
-        @media(max-width: 576px){
-            margin: 0 auto;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
 
-            max-width: 500px;
-            height: 220px;
-            width: 300px;
+      > .cancel-btn {
+        background-color: lightcoral;
+      }
 
+      > .confirm-btn {
+        background-color: lightgreen;
+      }
+
+      > .update-btn {
+        background-color: #ddd;
+      }
+    }
+
+    @media (max-width: 576px) {
+      height: 450px;
+      width: 300px;
+      padding: 2.5em 0;
+
+      /* .modal-1_icon {
+        left: 10.8em;
+      } */
+
+      > label {
+        font-size: 13px;
+
+        > input {
+          width: 50%;
+          padding: 0.03em;
+        }
+      }
+
+      .admin-me-cta {
+        margin-top: 1em;
+
+        > button {
+          padding: 0.3em;
+        }
+      }
+    }
+  }
+}
+
+/* ADMIN-MODAL-ME- END... */
+
+/* ADMIN-LEFT REPORT PAGE START... */
+.admin-report {
+  .report-header {
+    margin-block-start: 1em;
+    margin-left: 0.5em;
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .reportBtn {
+    margin: 1.5em 0 1em 1em;
+    padding: 0.5em;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    background-color: #1d3557;
+    color: #eee;
+    transition: all 300ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  .student-list {
+    .student-links {
+      text-decoration: none;
+      color: inherit;
+
+      .student {
+        list-style: none;
+        margin: 1.5em 1em;
+        background-color: #ddd;
+        padding: 2em 1em;
+        border-radius: 2px;
+        max-width: 1500px;
+        cursor: pointer;
+        transition: all 300ms ease-in-out;
+
+        > p {
+          margin-top: 1em;
+        }
+      }
+    }
+
+    .student:hover {
+      border-left: 6px solid #1d3557;
+      /* transition: all 300ms ease-in-out; */
+      transform: scale(1.02);
+    }
+  }
+}
+/* ADMIN-LEFT REPORT PAGE END... */
+
+/* ADMIN-LEFT INDIVIDUAL STUDENT REPORT PAGE START */
+.student-report {
+  height: 500px;
+  width: 600px;
+  background-color: #ddd;
+  margin: 2em auto;
+  padding-inline: 1em;
+
+  > .header {
+    text-align: center;
+    padding-block: 1em;
+  }
+
+  > .report-text {
+    padding-block: 1em 0.8em;
+  }
+
+  > .report-form {
+    > .class-present-container {
+      > .present-label {
+        margin-right: 1em;
+
+        font-weight: bold;
+      }
+    }
+
+    > .class-absent-container {
+      margin-block: 1em;
+
+      > .absent-label {
+        margin-right: 1.3em;
+
+        font-weight: bold;
+      }
+    }
+
+    > .attendance-rate-container {
+      > label {
+        font-weight: bold;
+      }
+    }
+
+    .class-present-container,
+    .class-absent-container,
+    .attendance-rate-container {
+      > input[type="text"] {
+        margin-left: 1.8em;
+      }
+
+      > .atn-value {
+        margin-left: 0.5em;
+      }
+    }
+
+    .class-present-container {
+      > input[type="text"] {
+        margin-left: 1.35em;
+      }
+    }
+
+    .attendance-rate-container {
+      > input[type="text"] {
+        margin-left: 0.55em;
+      }
+    }
+
+    > .btn-container {
+      margin-top: 2em;
+      display: flex;
+      gap: 1em;
+
+      > .download-btn {
+        background-color: #c4bcbc;
+        padding: 0.4em;
+        border: none;
+        border-radius: 1px;
+        cursor: pointer;
+        transition: all 300ms ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      > .cancel-btn {
+        background-color: #f56767;
+        padding: 0.4em;
+        border: none;
+        border-radius: 1px;
+        cursor: pointer;
+        transition: all 300ms ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}
+
+/* ADMIN-LEFT INDIVIDUAL STUDENT REPORT PAGE END */
+
+/* ADMIN-LEFT ATTENDANCE PAGE START */
+.attendance-section {
+  .attendance-btn {
+    background-color: #1d3557;
+    color: #eee;
+    margin: 1em 0 0 2.2em;
+    padding: 0.5em;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .atn-btn {
+    margin: 6px 4px;
+    padding: 0.35em;
+    background-color: #1d3557;
+    color: #eee;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .table-container {
+    /* border: 1px solid #000; */
+    margin: 30px;
+    > table,
+    tr,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 0.25em;
+    }
+
+    .table-body {
+      > tr td button {
+        padding: 0.25em;
+        cursor: pointer;
+        border-radius: 2px;
+        border: none;
+        transition: all 200ms ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
         }
 
+        &:not(:last-child) {
+          margin-right: 1.5em;
+        }
       }
-  
-      .analy-2{
+
+      .present-btn {
+        background-color: lightgreen;
+      }
+      .absent-btn {
+        background-color: lightcoral;
+      }
+      .reset-btn {
+        background-color: #ddd;
+      }
+    }
+  }
+}
+
+/* ADMIN-LEFT ATTENDANCE PAGE END */
+
+/* ADMIN-MAIN... */
+
+@media (max-width: 576px) {
+  .admin-body-section {
+    max-height: 600vh;
+    width: 100%;
+  }
+}
+
+.admin-body-section .admin-main {
+  @media (max-width: 576px) {
+    background-color: var(--third-clr);
+
+    min-height: 100vh;
+    min-width: 400%;
+
+    > h1 {
+      text-align: center;
+
+      font-size: 1.6em;
+    }
+  }
+
+  /* ANALYTICS 1 & 2 */
+  .analytics {
+    justify-content: center;
+    margin-top: 1em;
+
+    @media (max-width: 576px) {
+      flex-direction: column;
+
+      justify-content: start;
+      min-height: 80%;
+
+      gap: 2em;
+
+      padding: 1em 0;
+    }
+
+    .analy-1,
+    .analy-2 {
+      background-color: #eee;
+      height: 200px;
+      width: 300px;
+      border-radius: 2px;
+
+      @media (max-width: 576px) {
+        margin: 0 auto;
+
+        max-width: 500px;
+        height: 220px;
+        width: 300px;
+      }
+    }
+
+    .analy-2 {
       margin-left: 2em;
 
-      @media(max-width:576px){
-        margin:  0 auto;
-      }
-  
+      @media (max-width: 576px) {
+        margin: 0 auto;
       }
     }
-    
-    /* ANALYTICS-OVERALL... */
-    .analytics-overall{
-      background-color: #eee;
-      height: 250px;
-      width: 632px;
-      margin: 2em auto;
-      border-radius: 2px;
-
-      @media(max-width: 576px){
-        display: none;
-      }
-    }
-
-    /* .main-footer{
-  
-    } */
   }
 
-  
-  /* ASIDE-RIGHT... */
-  .admin-body-section{
-    >.admin-aside-right{
-        @media(max-width: 576px){
-            display: none;
+  /* ANALYTICS-OVERALL... */
+  .analytics-overall {
+    background-color: #eee;
+    height: 250px;
+    width: 632px;
+    margin: 2em auto;
+    border-radius: 2px;
 
-        }
-      background-color: #1d3557;
-  
-        >.aside-sched{
-          background-color: #eee;
-          height: 300px;
-          width: 300px;
-          margin: 1em auto;
-          border-radius: 2px;
-      }
+    @media (max-width: 576px) {
+      display: none;
     }
+  }
+
+  /* .main-footer{
   
-  } 
-  
-  /* ADMIN-BODY END... */
-  
-  /* ADMIN DASHBOARD END... */
+    } */
+}
+
+/* ASIDE-RIGHT... */
+.admin-body-section {
+  > .admin-aside-right {
+    @media (max-width: 576px) {
+      display: none;
+    }
+    background-color: #1d3557;
+
+    > .aside-sched {
+      background-color: #eee;
+      height: 300px;
+      width: 300px;
+      margin: 1em auto;
+      border-radius: 2px;
+    }
+  }
+}
+
+/* ADMIN-BODY END... */
+
+/* ADMIN DASHBOARD END... */

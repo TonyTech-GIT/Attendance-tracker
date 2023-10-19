@@ -148,13 +148,13 @@ const Auth = ({ dataReceived }) => {
                     <label className="roleLabel label flex flex-ai_c">
                         Role:
                         <div className="roles ">
-                            <label >
-                                Admin
+                            <label className="flex flex-ai_c" >
+                                <span>Admin</span>
                                 <input type="radio" value='admin' checked={role === 'admin'} onChange={handleRoleChange} />
                             </label>
 
-                            <label >
-                                Student
+                            <label className="flex flex-ai_c" >
+                                <span>Student</span>
                                 <input type="radio" value='student' checked={role === 'student'} onChange={handleRoleChange} />
                             </label>
 

@@ -202,10 +202,12 @@ const AdminDashboard = ({ authDetails }) => {
 
         const menuOverlay = document.getElementById('mobileOverlay')
         if (menuButton === true) {
-            menuOverlay.style.right = "-50%"
+            // menuOverlay.style.right = "-50%"
+            menuOverlay.style.display = "none"
 
         } else {
-            menuOverlay.style.right = "0"
+            // menuOverlay.style.right = "0"
+            menuOverlay.style.display = "block"
         }
 
         setMenuButton(!menuButton)
@@ -279,9 +281,9 @@ const AdminDashboard = ({ authDetails }) => {
 
 
                             </label>
-                            <label className="label-gender">
+                            <label className="label-regNo">
                                 RegNo:
-                                <input className="label-gender-text" type="text"
+                                <input className="label-regNo-text" type="text"
                                     value={regNo}
                                     onChange={(e) => setRegNo(e.target.value)}
                                     placeholder="Enter your RegNo" />

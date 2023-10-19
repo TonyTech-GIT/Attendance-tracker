@@ -373,7 +373,7 @@ const StudentDashboard = ({ authDetails }) => {
                                 <div className="modal-1">
 
                                     <main className="content">
-                                        <FontAwesomeIcon className="modal-1_icon" onClick={handleAdminProfile} icon={faClose} />
+                                        <FontAwesomeIcon className="student-modal-1_icon" onClick={handleAdminProfile} icon={faClose} />
 
                                         <div className="student-label-info flex flex-jc_sb">
 

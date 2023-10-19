@@ -82,8 +82,6 @@ const Login = ({ dataReceived }) => {
             })
 
 
-
-
     }
 
     return (
@@ -120,7 +118,7 @@ const Login = ({ dataReceived }) => {
                             onChange={(e) => setPassword(e.target.value)} placeholder="Enter a password..." />
 
                         <button type='button' onClick={handleIconVisibility} className='password-toggle-btn'>
-                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                            <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                         </button>
 
                     </label>
