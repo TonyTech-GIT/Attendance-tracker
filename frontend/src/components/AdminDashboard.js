@@ -374,7 +374,7 @@ const AdminDashboard = ({ authDetails }) => {
 
                             <li onClick={navigateAttendancePage}>Attendance</li>
                             {/* <li>Courses</li> */}
-                            <li>Student Profile</li>
+                            {/* <li>Student Profile</li> */}
 
                             <Link to={'/'}>
                                 <button className="mobile-btn">Sign Out</button>
@@ -456,7 +456,7 @@ const AdminDashboard = ({ authDetails }) => {
 
                             <li onClick={navigateAttendancePage}>Attendance</li>
                             {/* <li>Courses</li> */}
-                            <li>Student Profile</li>
+                            {/* <li>Student Profile</li> */}
 
                             {/* Static view of admin profile */}
                             {showModal && (

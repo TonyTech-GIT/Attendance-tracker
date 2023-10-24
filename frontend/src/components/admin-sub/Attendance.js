@@ -244,7 +244,7 @@ const Attendance = ({ avgAttendance, presentCount, absentCount, testAtn }) => {
                                         <td>{studentList.firstName}</td>
                                         <td>{studentList.lastName}</td>
                                         <td>{studentList.regNo}</td>
-                                        <td>
+                                        <td className="atd-btn">
                                             <button className="present-btn" onClick={() => handleButtonPresent(index)}>Present</button>
                                             <button className="absent-btn" onClick={() => handleButtonAbsent(index)}>Absent</button>
                                             <button className="reset-btn" onClick={() => handleResetButton(index)}>Reset</button>

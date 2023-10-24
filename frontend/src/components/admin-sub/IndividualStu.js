@@ -65,7 +65,7 @@ const IndividualStu = ({ attendanceReceived, presentReceived, absentReceived, te
 
 
     return (
-        <div>
+        <div className='individual-report'>
             <h1>Individual Student Report</h1>
 
             <main className="student-report">
